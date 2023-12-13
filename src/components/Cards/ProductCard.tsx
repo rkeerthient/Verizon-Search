@@ -1,4 +1,4 @@
-import { Image } from "@yext/pages/components";
+import { Image } from "@yext/sites-components";
 import { CardProps } from "@yext/search-ui-react";
 import * as React from "react";
 import Product from "../../types/products";

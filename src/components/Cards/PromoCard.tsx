@@ -1,6 +1,6 @@
 import { CardProps } from "@yext/search-ui-react";
 import * as React from "react";
-import { Image } from "@yext/pages/components";
+import { Image } from "@yext/sites-components";
 import Ce_promotion from "../../types/promotion";
 import { LexicalRichText } from "@yext/react-components";
 
