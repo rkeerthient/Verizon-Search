@@ -12,9 +12,9 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
 
   return (
     <div className="w-full border-b border-gray-300 p-4 my-4 ">
-      <div className="text-lg font-light">
+      <div className="">
         <div onClick={() => setIsActive(!isActive)}>
-          <div className="   hover:cursor-pointer  ">
+          <div className=" text-xl font-bold  hover:cursor-pointer  ">
             <span>{result.name}</span>
             <div style={{ float: "right" }}>
               {isActive ? (
@@ -26,18 +26,21 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
           </div>
         </div>
         {isActive && (
-          <>
-            <div className="   mt-3 flex flex-col gap-2 ">
+          <div className="flex flex-col gap-4">
+            <div className="  mt-3 flex flex-col gap-2 ">
               <LexicalRichText
                 serializedAST={JSON.stringify(result.rawData.answerV2.json)}
               />
             </div>
             <div>
-              <a href={result.rawData.c_primaryCTA?.link}>
+              <a
+                className="px-4 py-2 border-black border-2  font-bold hover:shadow-xl   boorder-black text-black rounded-full"
+                href={result.rawData.c_primaryCTA?.link}
+              >
                 {result.rawData.c_primaryCTA?.label}
               </a>
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

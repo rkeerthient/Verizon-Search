@@ -9,6 +9,7 @@ import {
 import { useEffect } from "react";
 import FAQCard from "../components/Cards/FAQCard";
 import Loader from "../components/Loader";
+import ContactInfoCard from "../components/Cards/ContactInfoCard";
 
 const ContactInfoPage = () => {
   const searchActions = useSearchActions();
@@ -35,7 +36,7 @@ const ContactInfoPage = () => {
                 <AppliedFilters />
               </div>
               <VerticalResults
-                CardComponent={FAQCard}
+                CardComponent={ContactInfoCard}
                 customCssClasses={{
                   verticalResultsContainer: ` bg-white`,
                 }}

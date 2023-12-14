@@ -37,7 +37,7 @@ const LinksPage = () => {
               <VerticalResults
                 CardComponent={LinkCard}
                 customCssClasses={{
-                  verticalResultsContainer: `grid grid-cols-3`,
+                  verticalResultsContainer: `grid grid-cols-3 gap-4`,
                 }}
               />
               <Pagination />
