@@ -28,24 +28,15 @@ const Header = () => {
 
   return (
     <>
-      <div className="centered-container">
-        <nav className="py-6 flex items-center justify-between">
-          <img
-            src="https://cdn.fs.brandfolder.com/cache=expiry:604800/deY3VGFpSjC761Abjbfc"
-            width="50"
-            height="50"
-          ></img>
-          <div className="text-2xl font-semibold">Turtlehead Tacos</div>
-          <div className="flex gap-x-10 text-lg font-semibold">{linkDoms}</div>
-          <div className="space-x-5">
-            <Cta buttonText="Order Pickup" url="#" style="primary-cta"></Cta>
-            <Cta
-              buttonText="Order Delivery"
-              url="#"
-              style="secondary-cta"
-            ></Cta>
-          </div>
-        </nav>
+      <div >
+      <header className="py-5 px-0 bg-blacks">
+ 					<div className="centered-container">
+						<a href="https://www.verizon.com" className="mr-4 mx-auto">
+							<img className="w-8" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iNDI4IiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDQyOCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDI1MEg3Ny43MkwxNTUuNDMgNDE2LjY3TDM0OS43MyAwSDQyNy40NUwxOTQuMjkgNTAwSDExNi41OEwwIDI1MFoiIGZpbGw9IiNFRTAwMDAiLz4KPC9zdmc+Cg==" alt="Link to verizon website"  />
+						</a>
+					 
+					</div>
+ 			</header>
       </div>
     </>
   );

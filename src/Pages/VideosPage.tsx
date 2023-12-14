@@ -18,7 +18,7 @@ import ProductCard from "../components/Cards/ProductCard";
 import Loader from "../components/Loader";
 import SortDropdown from "../components/SortDropdown";
 
-const ProductsGrid = () => {
+const VideosPage = () => {
   const searchActions = useSearchActions();
   const loading = useSearchState((state) => state.searchStatus.isLoading);
 
@@ -26,7 +26,7 @@ const ProductsGrid = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");
     query && searchActions.setQuery(query);
-    searchActions.setVertical("devices");
+    searchActions.setVertical("videos");
     searchActions.executeVerticalQuery();
   }, []);
 
@@ -61,7 +61,7 @@ const ProductsGrid = () => {
             <div className="w-72  mr-5 ">
               <Facets customCssClasses={{ facetsContainer: "mr-10" }}>
                 <NumericalFacet
-                  fieldId="c_price.value"
+                  fieldId="price.value"
                   label="Price"
                   transformOptions={transformPriceFacet}
                 />
@@ -79,7 +79,7 @@ const ProductsGrid = () => {
                 <VerticalResults
                   CardComponent={ProductCard}
                   customCssClasses={{
-                    verticalResultsContainer: `grid grid-cols-3 gap-4`,
+                    verticalResultsContainer: `grid grid-cols-3 gap-2`,
                   }}
                 />
                 <div>
@@ -95,4 +95,4 @@ const ProductsGrid = () => {
   );
 };
 
-export default ProductsGrid;
+export default VideosPage;

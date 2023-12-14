@@ -19,8 +19,32 @@ export interface ComplexImage {
 	clickthroughUrl?: string,
 }
 
+export enum LinkType {
+	OTHER = "Other",
+	URL = "URL",
+	PHONE = "Phone",
+	EMAIL = "Email",
+}
+
+export interface C_primaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export interface C_secondaryCTA {
+	label?: string,
+	linkType?: LinkType,
+	link?: string,
+}
+
+export enum C_typeOfFAQ {
+	GENERAL_FAQ = "General FAQ",
+	PRODUCT_SUPPORT = "Product Support",
+}
+
 export default interface Faq {
-	answer?: string,
+	answerV2?: any,
 	landingPageUrl?: string,
 	nudgeEnabled?: boolean,
 	primaryConversationContact?: any,
@@ -28,8 +52,14 @@ export default interface Faq {
 	slug?: string,
 	logo?: ComplexImage,
 	name: string,
-	c_category?: string,
-	c_subCategory?: string,
+	c_activeOnAnswers?: boolean,
+	c_answersKeywords?: string[],
+	c_floatingNavigation?: boolean,
+	c_newLandingPageURL?: string,
+	c_primaryCTA?: C_primaryCTA,
+	c_productCategory?: string[],
+	c_secondaryCTA?: C_secondaryCTA,
+	c_typeOfFAQ?: C_typeOfFAQ,
 	keywords?: string[],
 	id: string,
 	timezone?: any,

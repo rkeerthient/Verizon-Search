@@ -26,11 +26,18 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
           </div>
         </div>
         {isActive && (
-          <div className="   mt-3  ">
-            <LexicalRichText
-              serializedAST={JSON.stringify(result.rawData.answerV2.json)}
-            />
-          </div>
+          <>
+            <div className="   mt-3 flex flex-col gap-2 ">
+              <LexicalRichText
+                serializedAST={JSON.stringify(result.rawData.answerV2.json)}
+              />
+            </div>
+            <div>
+              <a href={result.rawData.c_primaryCTA?.link}>
+                {result.rawData.c_primaryCTA?.label}
+              </a>
+            </div>
+          </>
         )}
       </div>
     </div>
