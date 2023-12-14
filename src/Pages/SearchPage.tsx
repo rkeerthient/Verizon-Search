@@ -1,11 +1,13 @@
 import {
   provideHeadless,
   useSearchActions,
+  useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
 import {
   DropdownItem,
   FocusedItemData,
+  onSearchFunc,
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
@@ -21,6 +23,7 @@ import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
 import React from "react";
+import { useEffect } from "react";
 const SearchPage = () => {
   const searchActions = useSearchActions();
   const [currentPath, setCurrentPath] = useState({
@@ -63,7 +66,30 @@ const SearchPage = () => {
     ...searchConfig,
     headlessId: "entity-preview-searcher",
   });
+  const query = new URLSearchParams(window.location.search).get("query");
+  const vert = useSearchState((state) => state.vertical.verticalKey);
+  const handleSearch: onSearchFunc = (searchEventData) => {
+    const { query } = searchEventData;
+    const queryParams = new URLSearchParams(window.location.search);
 
+    if (query) {
+      queryParams.set("query", query);
+    } else {
+      queryParams.delete("query");
+    }
+    history.pushState(null, "", "?" + queryParams.toString());
+    query && searchActions.setQuery(query);
+    vert
+      ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
+      : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
+  };
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    currentPath.id !== "all"
+      ? queryParams.set("vertical", currentPath.id)
+      : queryParams.delete("vertical");
+    history.pushState(null, "", "?" + queryParams.toString());
+  }, [currentPath]);
   const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading: boolean,
     verticalKeyToResults: Record<string, VerticalResultsData>,
