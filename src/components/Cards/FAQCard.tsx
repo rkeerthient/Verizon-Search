@@ -16,7 +16,7 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
         <div onClick={() => setIsActive(!isActive)}>
           <div className=" text-xl font-bold  hover:cursor-pointer  ">
             <span>{result.name}</span>
-            <div style={{ float: "right" }}>
+            <div style={{ float: "right" }}> 
               {isActive ? (
                 <ChevronUpIcon className="w-7 text-[#083b3a]" />
               ) : (
@@ -34,7 +34,7 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
             </div>
             <div>
               <a
-                className="px-4 py-2 border-black border-2  font-bold hover:shadow-xl   boorder-black text-black rounded-full"
+                className="px-4 py-2 border-black border-2  font-bold hover:shadow-xl text-black rounded-full"
                 href={result.rawData.c_primaryCTA?.link}
               >
                 {result.rawData.c_primaryCTA?.label}
