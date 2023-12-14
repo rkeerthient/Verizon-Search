@@ -30,8 +30,10 @@ const FAQsPage = () => {
         <>
           <div className="flex mt-4">
             <div className="w-full">
-              <div className="flex flex-col items-baseline">
+              <div className="flex  items-baseline justify-between">
                 <ResultsCount />
+              </div>
+              <div className="flex justify-between mb-4">
                 <AppliedFilters />
               </div>
               <VerticalResults

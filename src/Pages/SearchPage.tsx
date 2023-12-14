@@ -12,26 +12,27 @@ import {
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
 import FAQsPage from "./FAQsPage";
 import LinksPage from "./LinksPage";
 import ContactInfoPage from "./ContactInfoPage";
 import HomePage from "./HomePage";
 import Locator from "../templates/locator";
-import StoreLocator from "../components/StoreLocator";
+import StoreLocator from "./StorePage";
 import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
-import React from "react";
+import * as React from "react";
 import { useEffect } from "react";
+import VideosPage from "./VideosPage";
 const SearchPage = () => {
   const searchActions = useSearchActions();
+  const vert = useSearchState((state) => state.vertical.verticalKey);
   const [currentPath, setCurrentPath] = useState({
     label: "All Results",
     id: "all",
   });
-
   const navbarItem = [
     {
       label: "All Results",
@@ -63,15 +64,46 @@ const SearchPage = () => {
       id: "videos",
     },
   ];
+
+  const universalLimit = {
+    devices: 5,
+    faqs: 5,
+    contact_information: 5,
+    links: 5,
+    locations: 5,
+    videos: 5,
+  };
+
   const entityPreviewSearcher = provideHeadless({
     ...searchConfig,
     headlessId: "entity-preview-searcher",
   });
-  const vert = useSearchState((state) => state.vertical.verticalKey);
 
+  useLayoutEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+
+    const verticalKey = new URLSearchParams(window.location.search).get(
+      "vertical"
+    );
+    const query = new URLSearchParams(window.location.search).get("query");
+    verticalKey
+      ? (setCurrentPath(
+          navbarItem.filter((item) => item.id === verticalKey)[0]
+        ),
+        searchActions.setVertical(verticalKey))
+      : queryParams.delete("vertical");
+    query && searchActions.setQuery(query);
+    verticalKey
+      ? (searchActions.setVertical(verticalKey),
+        searchActions.executeVerticalQuery())
+      : (searchActions.setUniversal(),
+        searchActions.setUniversalLimit(universalLimit),
+        searchActions.executeUniversalQuery());
+  }, []);
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
+
     if (query) {
       queryParams.set("query", query);
     } else {
@@ -81,16 +113,10 @@ const SearchPage = () => {
     query && searchActions.setQuery(query);
     vert
       ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
-      : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
+      : (searchActions.setUniversal(),
+        searchActions.setUniversalLimit(universalLimit),
+        searchActions.executeUniversalQuery());
   };
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    currentPath.id !== "all"
-      ? queryParams.set("vertical", currentPath.id)
-      : queryParams.delete("vertical");
-    history.pushState(null, "", "?" + queryParams.toString());
-  }, [currentPath]);
 
   const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading: boolean,
@@ -210,6 +236,8 @@ const SearchPage = () => {
         <LinksPage />
       ) : currentPath.id === "locator" ? (
         <StoreLocator />
+      ) : currentPath.id === "videos" ? (
+        <VideosPage />
       ) : (
         <HomePage />
       )}

@@ -6,7 +6,6 @@ const LinkCard = (props: CardProps<Ce_link>): JSX.Element => {
   const { result } = props;
   const { name } = result;
   const { landingPageUrl, bodyV2 } = result.rawData;
-  console.log(bodyV2);
 
   return (
     <div className="w-full my-4 border p-4 bg-white">

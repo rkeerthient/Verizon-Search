@@ -1,6 +1,7 @@
 /**
  * This is an example of how to create a static template that uses getStaticProps to retrieve data.
  */
+import * as React from "react";
 import "../index.css";
 import {
   Template,
@@ -11,36 +12,26 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import PageLayout from "../components/page-layout";
-import StoreLocator from "../Pages/StorePage";
+import VideosPage from "../Pages/VideosPage";
 
 export const config: TemplateConfig = {
-  name: "locator",
+  name: "videos",
 };
 export const getPath: GetPath<TemplateRenderProps> = () => {
-  return `locator`;
+  return `videos`;
 };
 
-export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
-  relativePrefixToRoot,
-}): HeadConfig => {
+export const getHeadConfig: GetHeadConfig<
+  TemplateRenderProps
+> = (): HeadConfig => {
   return {
-    title: "Verizon | Locator",
+    title: "Dollar tree | Videos",
     charset: "UTF-8",
     viewport: "width=device-width, initial-scale=1",
-    tags: [
-      {
-        type: "link",
-        attributes: {
-          rel: "icon",
-          type: "image/x-icon",
-          href: relativePrefixToRoot,
-        },
-      },
-    ],
   };
 };
 
-const Locator: Template<TemplateRenderProps> = ({
+const VideosWrapper: Template<TemplateRenderProps> = ({
   document,
 }: TemplateRenderProps) => {
   const { _site } = document;
@@ -48,11 +39,11 @@ const Locator: Template<TemplateRenderProps> = ({
   return (
     <>
       <PageLayout _site={_site}>
-        <div className="mx-auto max-w-7xl px-4">
-          <StoreLocator />
+        <div className="centered-container">
+          <VideosPage />
         </div>
       </PageLayout>
     </>
   );
 };
-export default Locator;
+export default VideosWrapper;

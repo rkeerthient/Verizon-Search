@@ -11,8 +11,9 @@ import {
   useSearchActions,
 } from "@yext/search-headless-react";
 import "mapbox-gl/dist/mapbox-gl.css";
-import LocationCard from "./Cards/LocationCard";
+import LocationCard from "../components/Cards/LocationCard";
 import { useEffect } from "react";
+import * as React from "react";
 
 const StoreLocator = (): JSX.Element => {
   const searchActions = useSearchActions();
