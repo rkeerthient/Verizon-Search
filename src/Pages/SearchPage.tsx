@@ -83,6 +83,7 @@ const SearchPage = () => {
       ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
       : (searchActions.setUniversal(), searchActions.executeUniversalQuery());
   };
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     currentPath.id !== "all"
@@ -90,6 +91,7 @@ const SearchPage = () => {
       : queryParams.delete("vertical");
     history.pushState(null, "", "?" + queryParams.toString());
   }, [currentPath]);
+
   const renderEntityPreviews: RenderEntityPreviews = (
     autocompleteLoading: boolean,
     verticalKeyToResults: Record<string, VerticalResultsData>,
@@ -105,7 +107,6 @@ const SearchPage = () => {
     const productResults = verticalKeyToResults["devices"]?.results.map(
       (result) => result.rawData
     ) as unknown as Ce_device[];
-
     return productResults ? (
       <div className="grid grid-cols-4 px-2 gap-2 text-black">
         {productResults.map((result) => (
@@ -166,6 +167,7 @@ const SearchPage = () => {
             universalLimit: { devices: 4 },
             entityPreviewsDebouncingTime: 300,
           }}
+          onSearch={handleSearch}
         />
       ) : (
         <SearchBar
@@ -174,6 +176,7 @@ const SearchPage = () => {
             searchButton: "text-black searchBar",
           }}
           hideRecentSearches={true}
+          onSearch={handleSearch}
         />
       )}
       <div className=" bg-white">
