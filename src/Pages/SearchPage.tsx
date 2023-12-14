@@ -20,6 +20,7 @@ import StoreLocator from "../components/StoreLocator";
 import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
+import React from "react";
 const SearchPage = () => {
   const searchActions = useSearchActions();
   const [currentPath, setCurrentPath] = useState({
