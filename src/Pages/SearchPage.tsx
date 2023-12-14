@@ -4,6 +4,7 @@ import {
   useSearchState,
   VerticalResults as VerticalResultsData,
 } from "@yext/search-headless-react";
+
 import {
   DropdownItem,
   FocusedItemData,
@@ -66,12 +67,11 @@ const SearchPage = () => {
     ...searchConfig,
     headlessId: "entity-preview-searcher",
   });
-  const query = new URLSearchParams(window.location.search).get("query");
   const vert = useSearchState((state) => state.vertical.verticalKey);
+
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
-
     if (query) {
       queryParams.set("query", query);
     } else {
@@ -187,7 +187,7 @@ const SearchPage = () => {
                 <button
                   key={item.id}
                   className={`${
-                    currentPath.id === item.id && "border-primary-green"
+                    currentPath.id === item.id && "border-black"
                   }inline-flex items-center px-1 pt-1 border-transparent hover:border-primary-green border-b-2 text-sm font-medium`}
                   onClick={() => setCurrentPath(item)}
                 >
