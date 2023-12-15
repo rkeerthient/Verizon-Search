@@ -23,6 +23,14 @@ import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
 import VideosPage from "./VideosPage";
+export const universalLimit = {
+  devices: 5,
+  faqs: 5,
+  contact_information: 5,
+  links: 5,
+  locations: 5,
+  videos: 5,
+};
 const SearchPage = () => {
   const searchActions = useSearchActions();
   const vert = useSearchState((state) => state.vertical.verticalKey);
@@ -63,29 +71,12 @@ const SearchPage = () => {
     },
   ];
 
-  const universalLimit = {
-    devices: 5,
-    faqs: 5,
-    contact_information: 5,
-    links: 5,
-    locations: 5,
-    videos: 5,
-  };
-
-  const initValues = navbarItem.filter(
-    (item) => item.id === "all" || item.id === "devices"
-  );
-  console.log(initValues);
-
   const entityPreviewSearcher = provideHeadless({
     ...searchConfig,
     headlessId: "entity-preview-searcher",
   });
 
   useEffect(() => {
-    console.log(JSON.stringify(currentPath));
-  }, [currentPath]);
-  useLayoutEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
     const verticalKey = new URLSearchParams(window.location.search).get(
