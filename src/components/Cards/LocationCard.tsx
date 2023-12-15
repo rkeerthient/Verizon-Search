@@ -25,7 +25,7 @@ const LocationCard: CardComponent<Location> = ({
   const dayName: string = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
-  const todayTiming: Interval[] = hours[dayName.toLowerCase()].openIntervals;
+  // const todayTiming: Interval[] = hours[dayName.toLowerCase()].openIntervals;
 
   return (
     <div className="flex flex-col justify-between border p-4 gap-4 bg-white mx-4">
@@ -63,9 +63,12 @@ const LocationCard: CardComponent<Location> = ({
             )}
           </p>
         </div>
-        <div>
-          {todayTiming[0].start} - {todayTiming[0].end}
-        </div>
+        {hours && (
+          <div>
+            {hours[dayName.toLowerCase()].openIntervals[0].start} -{" "}
+            {hours[dayName.toLowerCase()].openIntervals[0].end}
+          </div>
+        )}
       </div>
       <div className="flex gap-2 items-start">
         <RiShoppingCart2Line className="mt-1" />
