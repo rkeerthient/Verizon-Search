@@ -26,6 +26,7 @@ import VideosPage from "./VideosPage";
 const SearchPage = () => {
   const searchActions = useSearchActions();
   const vert = useSearchState((state) => state.vertical.verticalKey);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [currentPath, setCurrentPath] = useState({
     label: "All Results",
     id: "all",
@@ -70,6 +71,11 @@ const SearchPage = () => {
     locations: 5,
     videos: 5,
   };
+
+  const initValues = navbarItem.filter(
+    (item) => item.id === "all" || item.id === "devices"
+  );
+  console.log(initValues);
 
   const entityPreviewSearcher = provideHeadless({
     ...searchConfig,
@@ -176,7 +182,7 @@ const SearchPage = () => {
     ) : null;
   };
   return (
-    <div className="w-full px-10 ">
+    <div className="w-full md:px-10 ">
       {!currentPath.id ||
       currentPath.id === "devices" ||
       currentPath.id === "all" ? (
@@ -205,9 +211,9 @@ const SearchPage = () => {
           onSearch={handleSearch}
         />
       )}
-      <div className=" bg-white mt-4 px-6 border-y">
+      <div className=" bg-white mt-4 px-1 md:px-6 border-y sm:relative ">
         <div className="mx-auto ">
-          <div className="h-16  justify-between hidden sm:flex ">
+          <div className="h-16  justify-between hidden md:flex ">
             <div className="ml-6 flex justify-between flex-1">
               {navbarItem.map((item) => (
                 <button
@@ -222,6 +228,79 @@ const SearchPage = () => {
                   <div className="font-bold">{item.label ?? item.id}</div>
                 </button>
               ))}
+            </div>
+          </div>
+        </div>
+        <div className="mx-auto">
+          <div className="h-16 justify-between md:hidden flex items-center">
+            <div className="ml-6 flex gap-4 flex-1 items-center">
+              {navbarItem
+                .filter((filterItem) => {
+                  if (currentPath.id === "all") {
+                    return (
+                      filterItem.id === "all" || filterItem.id === "devices"
+                    );
+                  } else {
+                    return (
+                      filterItem.id === "all" ||
+                      filterItem.id === currentPath.id
+                    );
+                  }
+                })
+                .map((item) => (
+                  <button
+                    key={item.id}
+                    className={`${
+                      currentPath.id === item.id
+                        ? "text-black border-b-4 border-[#ee0000]"
+                        : "text-[#919393] border-transparent"
+                    } inline-flex items-center px-1 pt-1 hover:border-primary-green border-b-2 md:text-lg font-medium`}
+                    onClick={() => setCurrentPath(item)}
+                  >
+                    <div className="font-bold">{item.label}</div>
+                  </button>
+                ))}
+              <div className="relative ml-auto mr-2">
+                <div
+                  className="text-[#919393] hover:cursor-pointer font-bold"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                >
+                  More
+                </div>
+                {showDropdown && (
+                  <ul className="absolute border shadow p-4 rounded-md flex flex-col right-0 bg-white z-10 w-[15.625rem]">
+                    {navbarItem
+                      .filter((filterItem) => {
+                        if (currentPath.id === "all") {
+                          return (
+                            filterItem.id !== "all" &&
+                            filterItem.id !== "devices"
+                          );
+                        } else {
+                          return (
+                            filterItem.id !== "all" &&
+                            filterItem.id !== currentPath.id
+                          );
+                        }
+                      })
+                      .map((item) => (
+                        <button
+                          key={item.id}
+                          className={`${
+                            currentPath.id === item.id
+                              ? "text-black border-b-4 border-[#ee0000]"
+                              : "text-[#919393] border-transparent"
+                          } inline-flex items-center px-1 pt-1 hover:border-primary-green border-b-2 md:text-lg font-medium`}
+                          onClick={() => (
+                            setCurrentPath(item), setShowDropdown(false)
+                          )}
+                        >
+                          <li className="font-bold">{item.label ?? item.id}</li>
+                        </button>
+                      ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         </div>
