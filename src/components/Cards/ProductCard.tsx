@@ -21,7 +21,7 @@ const ProductCard = (props: CardProps<Ce_device>) => {
         {c_answersPhoto ? (
           <Image
             image={c_answersPhoto}
-            className="  p-4  flex justify-center items-center"
+            className=" !w-3/4 md:!w-full !mx-auto p-4  flex justify-center items-center"
           ></Image>
         ) : (
           <img

@@ -131,7 +131,7 @@ const SearchPage = () => {
       (result) => result.rawData
     ) as unknown as Ce_device[];
     return productResults ? (
-      <div className="grid grid-cols-4 px-2 gap-2 text-black">
+      <div className="grid md:grid-cols-4 grid-ciols-1 px-2 gap-2 text-black">
         {productResults.map((result) => (
           <DropdownItem
             className="border gap-2"
@@ -147,12 +147,12 @@ const SearchPage = () => {
             >
               <a
                 href={"https://verizon.com"}
-                className="flex flex-col gap-2 w-full"
+                className="flex items-center md:flex-col gap-2 w-full"
               >
                 {result.c_answersPhoto ? (
                   <Image
                     image={result.c_answersPhoto}
-                    className="h-full !w-full p-6 mx-auto"
+                    className="h-full !w-32 md:!w-full p-6 mx-auto"
                   />
                 ) : (
                   <img
@@ -161,7 +161,7 @@ const SearchPage = () => {
                     alt=""
                   />
                 )}
-                <div className="flex flex-col gap-2 px-1">
+                <div className="flex w-1/2 md:w-full flex-col gap-2 px-1">
                   <div className="text-xs">{result.name}</div>
                   <div className="text-sm">£{result.c_price?.value}</div>
                 </div>
