@@ -3,8 +3,8 @@ import * as React from "react";
 import { useState } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
-import Faq from "../../types/faqs";
 import { LexicalRichText } from "@yext/react-components";
+import Faq from "../types/faqs";
 
 const FAQCard = (props: CardProps<Faq>): JSX.Element => {
   const { result } = props;
@@ -26,7 +26,7 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
           </div>
         </div>
         {isActive && (
-          <div className="   mt-3  ">
+          <div className="mt-3">
             <LexicalRichText
               serializedAST={JSON.stringify(result.rawData.answerV2.json)}
             />

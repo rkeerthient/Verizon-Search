@@ -16,7 +16,7 @@ type Props = {
 const PageLayout = ({ _site, children }: Props) => {
   return (
     <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-      <div className="min-h-screen">
+      <div className="min-h-screen !bg-[#f6f6f6]">
         <Header _site={_site} />
         {children}
         <Footer _site={_site}></Footer>

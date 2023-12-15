@@ -7,11 +7,11 @@ import {
   UniversalResults,
 } from "@yext/search-ui-react";
 import ProductCard from "../components/Cards/ProductCard";
-import FAQCard from "../components/FAQCard";
 import ContactInfoCard from "../components/Cards/ContactInfoCard";
 import { VideoCard } from "../components/Cards/VideoCard";
 import LinkCard from "../components/Cards/LinkCard";
 import LocationCard from "../components/Cards/LocationCard";
+import FAQCard from "../components/Cards/FAQCard";
 
 const HomePage = () => {
   const searchActions = useSearchActions();

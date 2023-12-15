@@ -5,7 +5,11 @@ import Youtube_video from "../../types/videos";
 
 export function VideoCard(props: CardProps<Youtube_video>): JSX.Element {
   const { result } = props;
-  const opts = {
+  const optsMob = {
+    height: "270",
+    width: "450",
+  };
+  const optsDesk = {
     height: "270",
     width: "380",
   };
@@ -15,12 +19,23 @@ export function VideoCard(props: CardProps<Youtube_video>): JSX.Element {
 
   return (
     <div className="flex flex-col justify-between border rounded-lg mb-4 shadow-sm">
-      <YouTube
-        videoId={result.rawData.youtube_videoURL?.split("v=")[1]}
-        onReady={_onReady}
-        opts={opts}
-        className="border"
-      />
+      <span className="block md:hidden">
+        <YouTube
+          videoId={result.rawData.youtube_videoURL?.split("v=")[1]}
+          onReady={_onReady}
+          opts={optsMob}
+          className="border "
+        />
+      </span>
+      <span className="hidden md:block">
+        <YouTube
+          videoId={result.rawData.youtube_videoURL?.split("v=")[1]}
+          onReady={_onReady}
+          opts={optsDesk}
+          className="border "
+        />
+      </span>
+
       <div className="px-4">
         <p className="text-xl font-bold mt-4">{result.name}</p>
         <p className="mt-4">Posted - {result.rawData.youtube_publishedAt}</p>

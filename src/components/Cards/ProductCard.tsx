@@ -8,13 +8,15 @@ const ProductCard = (props: CardProps<Ce_device>) => {
   const {
     c_answersPhoto,
     c_price,
-     c_primaryCTA, c_secondaryCTA, description, c_colors,
-     c_24MonthlyPrice
+    c_primaryCTA,
+    c_secondaryCTA,
+    description,
+    c_colors,
+    c_24MonthlyPrice,
   } = result.rawData;
- 
 
   return (
-    <div className="bg-gray-50 py-4 flex flex-col  h-full gap-y-2 ">
+    <div className="bg-gray-50 py-4 shadow-md flex flex-col  h-full gap-y-2 ">
       <div className=" px-4">
         {c_answersPhoto ? (
           <Image
@@ -23,34 +25,49 @@ const ProductCard = (props: CardProps<Ce_device>) => {
           ></Image>
         ) : (
           <img
-            src={"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femfprotectionaustralia.com.au%2Fwp-content%2Fuploads%2F2015%2F07%2Fplaceholder-product.jpg&f=1&nofb=1&ipt=a9e4d6696ca75f1a86e4956ffe79955d42cd8e7777f0d0d7953c31031fc266b2&ipo=images"}
+            src={
+              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femfprotectionaustralia.com.au%2Fwp-content%2Fuploads%2F2015%2F07%2Fplaceholder-product.jpg&f=1&nofb=1&ipt=a9e4d6696ca75f1a86e4956ffe79955d42cd8e7777f0d0d7953c31031fc266b2&ipo=images"
+            }
             className=" p-4 flex justify-center items-center"
             alt=""
           />
         )}
       </div>
       <div className="flex px-4 w-full flex-col justify-between gap-4">
-        <div className="flex flex-col border-black  border-t-2 justify-between gap-2 h-32">
-          <div className="font-bold   text-black pt-2 " >
+        <div className="flex flex-col border-black  border-t-2 justify-between gap-2 h-28 md:h-32 font-base text-sm">
+          <div className="font-bold text-sm md:text-base text-black pt-2 ">
             {name}
           </div>
           <div className="font-bold">${c_price?.value}</div>
-          <div className="font-base text-sm">Starts at ${c_24MonthlyPrice} for 24 months, 0% APR</div>
-          {c_colors && <div className="flex gap-2">{c_colors.map((item, index)=><div key={index} className={`h-4 w-4 rounded-full `} style={{background: item}}></div> )}</div>  } 
+          <div className="font-base text-sm">
+            Starts at ${c_24MonthlyPrice} for 24 months, 0% APR
+          </div>
+          {c_colors && (
+            <div className="flex gap-2">
+              {c_colors.map((item, index) => (
+                <div
+                  key={index}
+                  className={`h-4 w-4 rounded-full `}
+                  style={{ background: item }}
+                ></div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="font-medium h-36 py-4 border-black border-y text-sm my-auto">
           {description}
         </div>
-      </div> <div className="flex justify-between w-full px-0 py-4 ">
+      </div>
+      <div className="flex justify-between w-full px-1 py-4 ">
         <a
           href={c_primaryCTA?.link}
-          className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto uppercase font-medium text-sm hover:shadow-lg "
+          className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto uppercase font-medium text-sm md:text-xs hover:shadow-lg "
         >
           {c_primaryCTA?.label}
         </a>
         <a
           href={c_secondaryCTA?.link}
-          className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto uppercase font-medium text-sm hover:shadow-lg"
+          className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto uppercase font-medium text-sm md:text-xs hover:shadow-lg"
         >
           {c_secondaryCTA?.label}
         </a>

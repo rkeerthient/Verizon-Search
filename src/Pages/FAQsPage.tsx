@@ -39,7 +39,7 @@ const FAQsPage = () => {
               <VerticalResults
                 CardComponent={FAQCard}
                 customCssClasses={{
-                  verticalResultsContainer: ` bg-white`,
+                  verticalResultsContainer: `  bg-white  `,
                 }}
               />
               <Pagination />

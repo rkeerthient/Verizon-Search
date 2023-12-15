@@ -11,12 +11,12 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className="w-full border-b border-gray-300 p-4 my-4 ">
-      <div className="">
+    <div className="w-full border-b p-4 my-4 ">
+      <div className=" ">
         <div onClick={() => setIsActive(!isActive)}>
-          <div className=" text-xl font-bold  hover:cursor-pointer  ">
+          <div className="text-sm md:text-xl font-bold  hover:cursor-pointer  ">
             <span>{result.name}</span>
-            <div style={{ float: "right" }}> 
+            <div style={{ float: "right" }}>
               {isActive ? (
                 <ChevronUpIcon className="w-7 text-[#083b3a]" />
               ) : (

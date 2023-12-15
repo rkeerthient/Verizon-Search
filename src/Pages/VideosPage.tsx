@@ -41,7 +41,7 @@ const VideosPage = () => {
                 <VerticalResults
                   CardComponent={VideoCard}
                   customCssClasses={{
-                    verticalResultsContainer: `grid grid-cols-3 gap-2`,
+                    verticalResultsContainer: `grid grid-cols-1 md:grid-cols-3 gap-2`,
                   }}
                 />
                 <div>

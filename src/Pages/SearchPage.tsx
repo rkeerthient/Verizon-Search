@@ -12,19 +12,16 @@ import {
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
 import FAQsPage from "./FAQsPage";
 import LinksPage from "./LinksPage";
 import ContactInfoPage from "./ContactInfoPage";
 import HomePage from "./HomePage";
-import Locator from "../templates/locator";
 import StoreLocator from "./StorePage";
 import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
-import * as React from "react";
-import { useEffect } from "react";
 import VideosPage from "./VideosPage";
 const SearchPage = () => {
   const searchActions = useSearchActions();
@@ -79,6 +76,9 @@ const SearchPage = () => {
     headlessId: "entity-preview-searcher",
   });
 
+  useEffect(() => {
+    console.log(JSON.stringify(currentPath));
+  }, [currentPath]);
   useLayoutEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
 
@@ -176,7 +176,7 @@ const SearchPage = () => {
     ) : null;
   };
   return (
-    <div className=" w-full px-10 ">
+    <div className="w-full px-10 ">
       {!currentPath.id ||
       currentPath.id === "devices" ||
       currentPath.id === "all" ? (
@@ -205,16 +205,18 @@ const SearchPage = () => {
           onSearch={handleSearch}
         />
       )}
-      <div className=" bg-white">
+      <div className=" bg-white mt-4 px-6 border-y">
         <div className="mx-auto ">
-          <div className="h-16 justify-between border-b hidden sm:flex ">
+          <div className="h-16  justify-between hidden sm:flex ">
             <div className="ml-6 flex justify-between flex-1">
               {navbarItem.map((item) => (
                 <button
                   key={item.id}
                   className={`${
-                    currentPath.id === item.id && "border-black"
-                  }inline-flex items-center px-1 pt-1 border-transparent hover:border-primary-green border-b-2 text-sm font-medium`}
+                    currentPath.id === item.id
+                      ? "text-black border-b-4 border-[#ee0000]"
+                      : "text-[#919393] border-transparent"
+                  } inline-flex items-center px-1 pt-1  hover:border-primary-green border-b-2 text-lg font-medium`}
                   onClick={() => setCurrentPath(item)}
                 >
                   <div className="font-bold">{item.label ?? item.id}</div>
