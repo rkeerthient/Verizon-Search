@@ -13,6 +13,7 @@ const ProductCard = (props: CardProps<Ce_device>) => {
     description,
     c_colors,
     c_24MonthlyPrice,
+    landingPageUrl,
   } = result.rawData;
 
   return (
@@ -35,9 +36,12 @@ const ProductCard = (props: CardProps<Ce_device>) => {
       </div>
       <div className="flex px-4 w-full flex-col justify-between gap-4">
         <div className="flex flex-col border-black  border-t-2 justify-between gap-2 h-28 md:h-32 font-base text-sm">
-          <div className="font-bold text-sm md:text-base text-black pt-2 ">
+          <a
+            href={landingPageUrl}
+            className="font-bold text-sm md:text-base text-black pt-2 "
+          >
             {name}
-          </div>
+          </a>
           <div className="font-bold">${c_price?.value}</div>
           <div className="font-base text-sm">
             Starts at ${c_24MonthlyPrice} for 24 months, 0% APR

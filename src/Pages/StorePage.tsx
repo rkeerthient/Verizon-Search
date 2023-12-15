@@ -3,6 +3,7 @@ import {
   FilterSearch,
   OnSelectParams,
   VerticalResults,
+  ResultsCount,
 } from "@yext/search-ui-react";
 import {
   Matcher,
@@ -44,9 +45,10 @@ const StoreLocator = (): JSX.Element => {
       {loading ? (
         <Loader />
       ) : (
-        <div className="flex h-[calc(100vh-242px)] border">
-          <div className="flex w-1/3 flex-col">
-            <FilterSearch
+        <div className="flex h-[calc(100vh-242px)]">
+          <div className="flex w-2/5 flex-col">
+            <ResultsCount />
+            {/* <FilterSearch
               onSelect={handleFilterSelect}
               placeholder="Find Locations Near You"
               searchFields={[
@@ -55,13 +57,15 @@ const StoreLocator = (): JSX.Element => {
                   fieldApiName: "builtin.location",
                 },
               ]}
-            />
+            /> */}
             <VerticalResults
-              customCssClasses={{ verticalResultsContainer: "overflow-y-auto" }}
+              customCssClasses={{
+                verticalResultsContainer: "overflow-y-auto flex flex-col gap-4",
+              }}
               CardComponent={LocationCard}
             />
           </div>
-          <div className="w-2/3">
+          <div className="w-3/5">
             <MapboxMap
               mapboxAccessToken={
                 "pk.eyJ1Ijoic3VubnlrZWVydGhpIiwiYSI6ImNsNWh5ZGt3czAyejUzY3A3Y3pvZ2E0bTgifQ.TNHfh1HL0LwTzLxs2TOaBQ"
