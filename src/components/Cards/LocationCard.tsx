@@ -13,6 +13,7 @@ const LocationCard: CardComponent<Location> = ({
     address,
     yextDisplayCoordinate,
     neighborhood,
+    geocodedCoordinate,
     landingPageUrl = `https://www.verizon.com/stores/`,
     mainPhone,
     hours,
@@ -30,11 +31,14 @@ const LocationCard: CardComponent<Location> = ({
   return (
     <div className="flex flex-col justify-between border p-4 gap-4 bg-white mx-4">
       <div className="flex justify-between ">
-        <a href={landingPageUrl} className=" font-bold underline">
+        <a
+          href={getGoogleMapsLink(geocodedCoordinate)}
+          className=" font-bold underline"
+        >
           {name}
         </a>
         <a
-          href={landingPageUrl}
+          href={getGoogleMapsLink(geocodedCoordinate)}
           className="px-2 py-1 font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
         >
           View store details
@@ -74,7 +78,10 @@ const LocationCard: CardComponent<Location> = ({
         <RiShoppingCart2Line className="mt-1" />
         <div className="flex flex-col">
           <div>
-            <a className="underline" href={landingPageUrl}>
+            <a
+              className="underline"
+              href={getGoogleMapsLink(geocodedCoordinate)}
+            >
               Shop this store
             </a>
           </div>
@@ -87,9 +94,7 @@ const LocationCard: CardComponent<Location> = ({
         <BiEnvelopeOpen className="mt-1" />
         <div className="flex flex-col">
           <div>
-            <a className="underline" href={landingPageUrl}>
-              5G, LTE & Fios Home Internet sales
-            </a>
+            <div>5G, LTE & Fios Home Internet sales</div>
           </div>
           <div>
             <div className="text-sm">No equipment return</div>
@@ -98,7 +103,7 @@ const LocationCard: CardComponent<Location> = ({
       </div>
 
       <a
-        href={landingPageUrl}
+        href={getGoogleMapsLink(geocodedCoordinate)}
         className="px-2 py-1  w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
       >
         View store details
