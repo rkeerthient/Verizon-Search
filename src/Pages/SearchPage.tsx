@@ -63,7 +63,7 @@ const SearchPage = () => {
     },
     {
       label: "Locations",
-      id: "locator",
+      id: "locations",
     },
     {
       label: "Videos",
@@ -78,7 +78,6 @@ const SearchPage = () => {
 
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-
     const verticalKey = new URLSearchParams(window.location.search).get(
       "vertical"
     );
@@ -97,6 +96,14 @@ const SearchPage = () => {
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
   }, []);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    currentPath.id !== "all"
+      ? queryParams.set("vertical", currentPath.id)
+      : queryParams.delete("vertical");
+    history.pushState(null, "", "?" + queryParams.toString());
+  }, [currentPath]);
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
@@ -300,13 +307,11 @@ const SearchPage = () => {
         <ProductsGrid />
       ) : currentPath.id === "faqs" ? (
         <FAQsPage />
-      ) : currentPath.id === "links" ? (
-        <LinksPage />
       ) : currentPath.id === "contactInfo" ? (
         <ContactInfoPage />
       ) : currentPath.id === "links" ? (
         <LinksPage />
-      ) : currentPath.id === "locator" ? (
+      ) : currentPath.id === "locations" ? (
         <StoreLocator />
       ) : currentPath.id === "videos" ? (
         <VideosPage />

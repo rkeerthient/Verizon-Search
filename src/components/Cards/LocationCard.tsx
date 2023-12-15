@@ -7,6 +7,9 @@ import Location, { Coordinate } from "../../types/locations";
 const LocationCard: CardComponent<Location> = ({
   result,
 }: CardProps<Location>): JSX.Element => {
+  console.log(JSON.stringify(result));
+
+  const { name } = result;
   const location = result.rawData;
 
   const getGoogleMapsLink = (coordinate: Coordinate): string => {
@@ -17,6 +20,7 @@ const LocationCard: CardComponent<Location> = ({
     <div className="flex justify-between border-y p-4">
       <div className="flex">
         <div>
+          {name}
           <a
             target={"_blank"}
             href={location.slug}
@@ -25,8 +29,12 @@ const LocationCard: CardComponent<Location> = ({
           >
             {location.neighborhood}
           </a>
-          <p className="text-sm">{location.address.line1}</p>
-          <p className="text-sm">{`${location.address.city}, ${location.address.region} ${location.address.postalCode}`}</p>
+          {location.address && (
+            <>
+              <p className="text-sm">{location.address.line1}</p>
+              <p className="text-sm">{`${location.address.city}, ${location.address.region} ${location.address.postalCode}`}</p>
+            </>
+          )}
         </div>
       </div>
       <div className="flex items-center">
