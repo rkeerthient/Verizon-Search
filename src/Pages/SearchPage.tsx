@@ -224,7 +224,7 @@ const SearchPage = () => {
         </div>
         <div className="mx-auto">
           <div className="h-16 justify-between md:hidden flex items-center">
-            <div className="ml-6 flex gap-4 flex-1 items-center">
+            <div className="ml-2 md:ml-6 flex gap-4 flex-1 items-center">
               {navbarItem
                 .filter((filterItem) => {
                   if (currentPath.id === "all") {
