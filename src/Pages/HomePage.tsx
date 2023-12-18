@@ -13,6 +13,7 @@ import LinkCard from "../components/Cards/LinkCard";
 import LocationCard from "../components/Cards/LocationCard";
 import FAQCard from "../components/Cards/FAQCard";
 import { universalLimit } from "./SearchPage";
+import LocationUniversalCard from "../components/Cards/LocationUniversal";
 
 const HomePage = () => {
   const searchActions = useSearchActions();
@@ -103,7 +104,7 @@ const HomePage = () => {
                     viewAllButton: true,
                   },
                   locations: {
-                    CardComponent: LocationCard,
+                    CardComponent: LocationUniversalCard,
                     SectionComponent: GridSection,
                     label: "Locations",
                     viewAllButton: true,
