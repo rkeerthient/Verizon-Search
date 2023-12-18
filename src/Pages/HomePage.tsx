@@ -3,6 +3,7 @@ import Loader from "../components/Loader";
 import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
   DirectAnswer,
+  MapboxMap,
   ResultsCount,
   UniversalResults,
 } from "@yext/search-ui-react";
@@ -10,10 +11,10 @@ import ProductCard from "../components/Cards/ProductCard";
 import ContactInfoCard from "../components/Cards/ContactInfoCard";
 import { VideoCard } from "../components/Cards/VideoCard";
 import LinkCard from "../components/Cards/LinkCard";
-import LocationCard from "../components/Cards/LocationCard";
 import FAQCard from "../components/Cards/FAQCard";
 import { universalLimit } from "./SearchPage";
 import LocationUniversalCard from "../components/Cards/LocationUniversal";
+import Mapboxuniv from "../components/Cards/Mapboxuniv";
 
 const HomePage = () => {
   const searchActions = useSearchActions();
@@ -34,7 +35,21 @@ const HomePage = () => {
       </div>
     );
   };
-
+  const LocationSection = ({ results, CardComponent, header }: any) => {
+    return (
+      <div>
+        <div>{header}</div>
+        <div className="h-[400px] w-full">
+          <Mapboxuniv data={results}></Mapboxuniv>
+        </div>
+        <div className="flex flex-col mt-4 gap-2">
+          {results.map((r: any) => (
+            <CardComponent result={r} />
+          ))}
+        </div>
+      </div>
+    );
+  };
   const FlexSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
       return <div>Missing Card Component</div>;
@@ -105,7 +120,7 @@ const HomePage = () => {
                   },
                   locations: {
                     CardComponent: LocationUniversalCard,
-                    SectionComponent: GridSection,
+                    SectionComponent: LocationSection,
                     label: "Locations",
                     viewAllButton: true,
                   },

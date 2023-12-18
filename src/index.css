@@ -94,3 +94,29 @@
 .slick-slider .slick-slide {
   padding: 0 15px;
 }
+
+@responsive {
+  .univLocMap {
+    display: contents;
+  }
+  .map-container {
+    display: block;
+  }
+  .univLocMap .map-container {
+    width: 100%;
+    height: 300px;
+  }
+  .univLocMap #map {
+    top: 0;
+    bottom: 0;
+    width: 100% !important;
+  }
+  .mobImg {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.map-container {
+  @apply w-full h-[400px];
+}
