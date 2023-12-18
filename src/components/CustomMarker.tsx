@@ -25,7 +25,6 @@ export default function CustomMarker(props: CustomMarkerProps) {
   const focused = id === focusedId;
   const hovered = id === hoveredId;
   const map = useMapContext();
-  console.log(selectedId);
 
   useEffect(() => {
     if (selectedId === id) {
@@ -39,7 +38,7 @@ export default function CustomMarker(props: CustomMarkerProps) {
     <Marker
       coordinate={coordinate}
       id={id}
-      onClick={setSelectedId}
+      onClick={() => setSelectedId(id)}
       onFocus={(focused, id) => setFocusedId(focused ? id : "")}
       onHover={(hovered, id) => setHoveredId(hovered ? id : "")}
       zIndex={selected ? 1 : hovered || focused ? 2 : 0}
@@ -49,6 +48,7 @@ export default function CustomMarker(props: CustomMarkerProps) {
         index={index}
         height={selected ? 57 : 49}
         width={selected ? 33 : 29}
+        textColor={selected || hovered || focused ? "#FFFFFF" : undefined}
       />
     </Marker>
   );

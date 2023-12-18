@@ -2,12 +2,10 @@ import { useSearchState } from "@yext/search-headless-react";
 import type { Coordinate } from "@yext/types";
 
 type LocatorSearchResultType = {
+  geocodedCoordinate: Coordinate;
   coordinate: Coordinate;
   id: string;
 };
-
-// Custom hook to get search results from search state and map them to the required fields for the Map and Marker components
-// If displayAllOnNoResults = true, the search will use the 20 locations closest to the users location by default
 export function useGetSearchResults(displayAllOnNoResults: boolean) {
   const state = useSearchState((state) => state);
   const searchResults = state.vertical.results || [];

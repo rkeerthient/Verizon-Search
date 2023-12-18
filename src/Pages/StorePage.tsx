@@ -2,6 +2,8 @@ import {
   OnSelectParams,
   VerticalResults,
   ResultsCount,
+  Pagination,
+  LocationBias,
 } from "@yext/search-ui-react";
 import {
   Matcher,
@@ -27,7 +29,6 @@ const StoreLocator = (): JSX.Element => {
   const [focusedEntityId, setFocusedEntityId] = useState("");
   const [hoveredEntityId, setHoveredEntityId] = useState("");
   const results = useGetSearchResults(true);
-  const MAPBOX_STYLE = "mapbox://styles/mapbox/light-v10";
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -72,16 +73,7 @@ const StoreLocator = (): JSX.Element => {
           <div className="flex h-[calc(100vh-242px)]">
             <div className="flex w-2/5 flex-col">
               <ResultsCount />
-              {/* <FilterSearch
-              onSelect={handleFilterSelect}
-              placeholder="Find Locations Near You"
-              searchFields={[
-                {
-                  entityType: "location",
-                  fieldApiName: "builtin.location",
-                },
-              ]}
-            /> */}
+
               <VerticalResults
                 customCssClasses={{
                   verticalResultsContainer:
@@ -94,7 +86,7 @@ const StoreLocator = (): JSX.Element => {
               <Map
                 provider={MapboxMaps}
                 defaultZoom={10}
-                bounds={results.map((data) => data.coordinate)}
+                bounds={results.map((data) => data.geocodedCoordinate)}
                 padding={{ top: 100, bottom: 200, left: 50, right: 50 }}
                 className="h-full"
                 apiKey="pk.eyJ1Ijoic3VubnlrZWVydGhpIiwiYSI6ImNsNWh5ZGt3czAyejUzY3A3Y3pvZ2E0bTgifQ.TNHfh1HL0LwTzLxs2TOaBQ"
@@ -109,6 +101,10 @@ const StoreLocator = (): JSX.Element => {
                 ))}
               </Map>
             </div>
+          </div>
+          <div className="mt-4 gap-2">
+            <Pagination />
+            <LocationBias />
           </div>
         </LocatorProvider>
       )}
