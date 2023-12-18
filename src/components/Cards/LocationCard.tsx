@@ -4,21 +4,15 @@ import { CardComponent, CardProps } from "@yext/search-ui-react";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import Location, { Coordinate, Interval } from "../../types/locations";
 import { BiEnvelopeOpen } from "react-icons/bi";
+import { useLocator } from "../../context/useLocator";
 
 const LocationCard: CardComponent<Location> = ({
   result,
 }: CardProps<Location>): JSX.Element => {
-  const { distance, name } = result;
-  const {
-    address,
-    yextDisplayCoordinate,
-    neighborhood,
-    geocodedCoordinate,
-    landingPageUrl = `https://www.verizon.com/stores/`,
-    mainPhone,
-    hours,
-  } = result.rawData;
-  console.log(JSON.stringify(hours));
+  const { distance, name, id } = result;
+
+  const { address, geocodedCoordinate, mainPhone, hours } = result.rawData;
+  const { selectedId, setSelectedId } = useLocator();
 
   const getGoogleMapsLink = (coordinate: Coordinate): string => {
     return `https://www.google.com/maps/dir/?api=1&destination=${coordinate.latitude},${coordinate.longitude}`;
@@ -26,19 +20,23 @@ const LocationCard: CardComponent<Location> = ({
   const dayName: string = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
-  // const todayTiming: Interval[] = hours[dayName.toLowerCase()].openIntervals;
 
   return (
-    <div className="flex flex-col justify-between border p-4 gap-4 bg-white mx-4">
+    <div
+      onClick={() => setSelectedId(id!)}
+      className={`flex flex-col justify-between border p-4 gap-4 bg-white mx-4 ${
+        selectedId === id ? `border-red-700` : `border-black`
+      }`}
+    >
       <div className="flex justify-between ">
         <a
-          href={getGoogleMapsLink(geocodedCoordinate)}
+          href={getGoogleMapsLink(geocodedCoordinate!)}
           className=" font-bold underline"
         >
           {name}
         </a>
         <a
-          href={getGoogleMapsLink(geocodedCoordinate)}
+          href={getGoogleMapsLink(geocodedCoordinate!)}
           className="px-2 py-1 font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
         >
           View store details
@@ -80,7 +78,7 @@ const LocationCard: CardComponent<Location> = ({
           <div>
             <a
               className="underline"
-              href={getGoogleMapsLink(geocodedCoordinate)}
+              href={getGoogleMapsLink(geocodedCoordinate!)}
             >
               Shop this store
             </a>
@@ -103,24 +101,11 @@ const LocationCard: CardComponent<Location> = ({
       </div>
 
       <a
-        href={getGoogleMapsLink(geocodedCoordinate)}
+        href={getGoogleMapsLink(geocodedCoordinate!)}
         className="px-2 py-1  w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
       >
         View store details
       </a>
-      {/* <div className="flex items-center">
-        {yextDisplayCoordinate && (
-          <a
-            target={"_blank"}
-            className="flex flex-col items-center text-sm text-orange"
-            href={getGoogleMapsLink(yextDisplayCoordinate)}
-            rel="noreferrer"
-          >
-            <RiDirectionFill size={24} />
-            <p>Directions</p>
-          </a>
-        )}
-      </div> */}
     </div>
   );
 };
