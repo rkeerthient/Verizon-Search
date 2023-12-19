@@ -4,7 +4,6 @@ import Ce_service from "../../types/service";
 import RTF from "../RTF";
 
 const ServiceCard = (props: CardProps<Ce_service>): JSX.Element => {
-  
   const { result } = props;
   const { name } = result;
   const { landingPageUrl, richTextDescription, c_primaryCTA, c_secondaryCTA } =
@@ -25,7 +24,7 @@ const ServiceCard = (props: CardProps<Ce_service>): JSX.Element => {
           {c_primaryCTA && (
             <a
               href={c_primaryCTA.link}
-              className="w-full items-center p-4 rounded-full text-white bg-[#014c6b] border flex justify-center text-center mx-auto uppercase font-semibold text-xs"
+              className="w-full capitalize items-center p-4 rounded-full text-white bg-[#014c6b] border flex justify-center text-center mx-auto   font-semibold text-xs"
             >
               {c_primaryCTA.label}
             </a>
@@ -33,7 +32,7 @@ const ServiceCard = (props: CardProps<Ce_service>): JSX.Element => {
           {c_secondaryCTA && (
             <a
               href={c_secondaryCTA.link}
-              className="w-full  items-center p-4 rounded-full text-white bg-[#014c6b] border flex justify-center text-center mx-auto uppercase font-semibold text-xs"
+              className="w-full  capitalize items-center p-4 rounded-full text-white bg-[#014c6b] border flex justify-center text-center mx-auto   font-semibold text-xs"
             >
               {c_secondaryCTA.label}
             </a>

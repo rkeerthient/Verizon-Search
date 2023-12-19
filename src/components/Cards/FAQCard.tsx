@@ -34,7 +34,7 @@ const FAQCard = (props: CardProps<Faq>): JSX.Element => {
             </div>
             <div>
               <a
-                className="px-4 py-2 border-black border-2  font-bold hover:shadow-xl text-black rounded-full"
+                className="capitalize px-4 py-2 border-black border-2  font-bold hover:shadow-xl text-black rounded-full"
                 href={result.rawData.c_primaryCTA?.link}
               >
                 {result.rawData.c_primaryCTA?.label}

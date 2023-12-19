@@ -65,13 +65,13 @@ const ProductCard = (props: CardProps<Ce_device>) => {
       <div className="flex justify-between w-full px-1 py-4 ">
         <a
           href={c_primaryCTA?.link}
-          className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto uppercase font-medium text-sm md:text-xs hover:shadow-lg "
+          className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto capitalize font-medium text-sm md:text-xs hover:shadow-lg "
         >
           {c_primaryCTA?.label}
         </a>
         <a
           href={c_secondaryCTA?.link}
-          className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto uppercase font-medium text-sm md:text-xs hover:shadow-lg"
+          className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto capitalize font-medium text-sm md:text-xs hover:shadow-lg"
         >
           {c_secondaryCTA?.label}
         </a>
