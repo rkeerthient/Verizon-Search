@@ -7,7 +7,6 @@ import {
   LocationBias,
 } from "@yext/search-ui-react";
 import { useEffect } from "react";
-import FAQCard from "../components/Cards/FAQCard";
 import Loader from "../components/Loader";
 import ContactInfoCard from "../components/Cards/ContactInfoCard";
 

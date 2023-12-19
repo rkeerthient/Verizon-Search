@@ -12,7 +12,7 @@ import {
 } from "@yext/pages";
 import PageLayout from "../components/page-layout";
 import ContactInfoPage from "../Pages/ContactInfoPage";
- 
+
 export const config: TemplateConfig = {
   name: "contactInfo",
 };
@@ -22,6 +22,7 @@ export const getPath: GetPath<TemplateRenderProps> = () => {
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   relativePrefixToRoot,
+  document,
 }): HeadConfig => {
   return {
     title: "Verizon | contactInfo",

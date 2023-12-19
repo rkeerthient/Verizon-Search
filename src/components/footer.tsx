@@ -7,8 +7,8 @@ import { ChatHeader, ChatPanel } from "@yext/chat-ui-react";
 import { IoChatbubblesSharp, IoCaretDownOutline } from "react-icons/io5";
 import { useState } from "react";
 const config: HeadlessConfig = {
-  botId: "verizon-assistant",
-  apiKey: "6d47649d2d769e29375b33ae0898c9dd",
+  botId: import.meta.env.YEXT_PUBLIC_BOTID,
+  apiKey: import.meta.env.YEXT_PUBLIC_BOT_API_KEY,
 };
 const Footer = () => {
   const [showChat, setShowChat] = useState(false);
