@@ -52,12 +52,11 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 const HomePage: Template<TemplateRenderProps> = ({}: TemplateRenderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleIsOpen = (status: boolean) => {
-    console.log(status);
     setIsOpen(status);
   };
   return (
     <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-      <HeaderHome isSearchOpen={handleIsOpen}></HeaderHome>
+      <HeaderHome isSearchOpen={() => handleIsOpen}></HeaderHome>
       <div className="centered-container ">
         <img
           src="https://i.imgur.com/lzgudD1.png"

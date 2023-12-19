@@ -44,8 +44,8 @@ const HomePage = () => {
           <Mapboxuniv data={results}></Mapboxuniv>
         </div>
         <div className="flex flex-col mt-4 gap-2">
-          {results.map((r: any) => (
-            <CardComponent result={r} />
+          {results.map((r: any, index: number) => (
+            <CardComponent key={index} result={r} />
           ))}
         </div>
       </div>

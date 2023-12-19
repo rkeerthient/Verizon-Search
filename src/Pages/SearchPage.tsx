@@ -32,6 +32,67 @@ export const universalLimit = {
   locations: 5,
   videos: 5,
 };
+const entityPreviewSearcher = provideHeadless({
+  ...searchConfig,
+  headlessId: "entity-preview-searcher",
+});
+const renderEntityPreviews: RenderEntityPreviews = (
+  autocompleteLoading: boolean,
+  verticalKeyToResults: Record<string, VerticalResultsData>,
+  dropdownItemProps: {
+    onClick: (
+      value: string,
+      _index: number,
+      itemData?: FocusedItemData
+    ) => void;
+    ariaLabel: (value: string) => string;
+  }
+): JSX.Element | null => {
+  const productResults = verticalKeyToResults["devices"]?.results.map(
+    (result) => result.rawData
+  ) as unknown as Ce_device[];
+  return productResults ? (
+    <div className="grid md:grid-cols-4 grid-ciols-1 px-2 gap-2 text-black">
+      {productResults.map((result) => (
+        <DropdownItem
+          className="border gap-2"
+          key={result.id}
+          value={result.name}
+          onClick={() => history.pushState(null, "", `/product/${result.id}`)}
+          ariaLabel={dropdownItemProps.ariaLabel}
+        >
+          <DropdownItem
+            key={result.id}
+            value={result.name}
+            ariaLabel={dropdownItemProps.ariaLabel}
+          >
+            <a
+              href={"https://verizon.com"}
+              className="flex items-center md:flex-col gap-2 w-full"
+            >
+              {result.c_answersPhoto ? (
+                <Image
+                  image={result.c_answersPhoto}
+                  className="h-full !w-32 md:!w-full p-6 mx-auto"
+                />
+              ) : (
+                <img
+                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femfprotectionaustralia.com.au%2Fwp-content%2Fuploads%2F2015%2F07%2Fplaceholder-product.jpg&f=1&nofb=1&ipt=a9e4d6696ca75f1a86e4956ffe79955d42cd8e7777f0d0d7953c31031fc266b2&ipo=images"
+                  className="h-full !w-full p-6 mx-auto"
+                  alt=""
+                />
+              )}
+              <div className="flex w-1/2 md:w-full flex-col gap-2 px-1">
+                <div className="text-xs">{result.name}</div>
+                <div className="text-sm">£{result.c_price?.value}</div>
+              </div>
+            </a>
+          </DropdownItem>
+        </DropdownItem>
+      ))}
+    </div>
+  ) : null;
+};
 const SearchPage = () => {
   const searchActions = useSearchActions();
   const vert = useSearchState((state) => state.vertical.verticalKey);
@@ -73,11 +134,6 @@ const SearchPage = () => {
     },
   ];
 
-  const entityPreviewSearcher = provideHeadless({
-    ...searchConfig,
-    headlessId: "entity-preview-searcher",
-  });
-
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const verticalKey = new URLSearchParams(window.location.search).get(
@@ -93,14 +149,7 @@ const SearchPage = () => {
     query && searchActions.setQuery(query);
     verticalKey
       ? (searchActions.setVertical(verticalKey),
-        searchActions
-          .executeVerticalQuery()
-          .then(
-            (res) =>
-              query &&
-              verticalKey === "devices" &&
-              setResults(res?.verticalResults.results[0])
-          ))
+        searchActions.executeVerticalQuery())
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
@@ -126,77 +175,12 @@ const SearchPage = () => {
     history.pushState(null, "", "?" + queryParams.toString());
     query && searchActions.setQuery(query);
     vert
-      ? (searchActions.setVertical(vert),
-        searchActions
-          .executeVerticalQuery()
-          .then(
-            (res) =>
-              query &&
-              currentPath.id === "devices" &&
-              setResults(res?.verticalResults.results[0])
-          ))
+      ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
   };
 
-  const renderEntityPreviews: RenderEntityPreviews = (
-    autocompleteLoading: boolean,
-    verticalKeyToResults: Record<string, VerticalResultsData>,
-    dropdownItemProps: {
-      onClick: (
-        value: string,
-        _index: number,
-        itemData?: FocusedItemData
-      ) => void;
-      ariaLabel: (value: string) => string;
-    }
-  ): JSX.Element | null => {
-    const productResults = verticalKeyToResults["devices"]?.results.map(
-      (result) => result.rawData
-    ) as unknown as Ce_device[];
-    return productResults ? (
-      <div className="grid md:grid-cols-4 grid-ciols-1 px-2 gap-2 text-black">
-        {productResults.map((result) => (
-          <DropdownItem
-            className="border gap-2"
-            key={result.id}
-            value={result.name}
-            onClick={() => history.pushState(null, "", `/product/${result.id}`)}
-            ariaLabel={dropdownItemProps.ariaLabel}
-          >
-            <DropdownItem
-              key={result.id}
-              value={result.name}
-              ariaLabel={dropdownItemProps.ariaLabel}
-            >
-              <a
-                href={"https://verizon.com"}
-                className="flex items-center md:flex-col gap-2 w-full"
-              >
-                {result.c_answersPhoto ? (
-                  <Image
-                    image={result.c_answersPhoto}
-                    className="h-full !w-32 md:!w-full p-6 mx-auto"
-                  />
-                ) : (
-                  <img
-                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Femfprotectionaustralia.com.au%2Fwp-content%2Fuploads%2F2015%2F07%2Fplaceholder-product.jpg&f=1&nofb=1&ipt=a9e4d6696ca75f1a86e4956ffe79955d42cd8e7777f0d0d7953c31031fc266b2&ipo=images"
-                    className="h-full !w-full p-6 mx-auto"
-                    alt=""
-                  />
-                )}
-                <div className="flex w-1/2 md:w-full flex-col gap-2 px-1">
-                  <div className="text-xs">{result.name}</div>
-                  <div className="text-sm">£{result.c_price?.value}</div>
-                </div>
-              </a>
-            </DropdownItem>
-          </DropdownItem>
-        ))}
-      </div>
-    ) : null;
-  };
   return (
     <div className="w-full md:px-10 ">
       {!currentPath.id ||
@@ -215,7 +199,7 @@ const SearchPage = () => {
             universalLimit: { devices: 4 },
             entityPreviewsDebouncingTime: 300,
           }}
-          onSearch={handleSearch}
+          onSearch={() => handleSearch}
         />
       ) : (
         <SearchBar
@@ -224,7 +208,7 @@ const SearchPage = () => {
             searchButton: "text-black searchBar",
           }}
           hideRecentSearches={true}
-          onSearch={handleSearch}
+          onSearch={() => handleSearch}
         />
       )}
       <div className=" bg-white mt-4 px-1 md:px-6 border-y sm:relative ">

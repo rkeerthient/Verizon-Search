@@ -19,8 +19,7 @@ import ProductCard from "../components/Cards/ProductCard";
 import Loader from "../components/Loader";
 import SortDropdown from "../components/SortDropdown";
 import { IoCloseOutline } from "react-icons/io5";
-import Ce_device from "../types/devices";
-import { Image } from "@yext/sites-components";
+ import { Image } from "@yext/sites-components";
 
 const ProductsGrid = ({ initVals }: any) => {
   const searchActions = useSearchActions();
@@ -28,8 +27,7 @@ const ProductsGrid = ({ initVals }: any) => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
   const facets = useSearchState((state) => state.filters.facets);
   const [result, setResult] = useState<any>(initVals);
-  console.log(initVals);
-
+ 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");

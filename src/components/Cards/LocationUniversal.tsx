@@ -88,13 +88,13 @@ const LocationUniversalCard: CardComponent<Location> = ({
             <div>
               <div className="text-sm md:flex">
                 {pickupAndDeliveryServices?.map((item, index) => (
-                  <>
-                    <span key={index}>{item}</span>
+                  <span key={index}>
+                    <span>{item}</span>
                     {pickupAndDeliveryServices.length >= 1 &&
                       index + 1 !== pickupAndDeliveryServices.length && (
                         <span>,&nbsp;</span>
                       )}
-                  </>
+                  </span>
                 ))}
               </div>
             </div>
