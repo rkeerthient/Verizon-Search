@@ -16,11 +16,14 @@ import FAQCard from "../components/Cards/FAQCard";
 import { universalLimit } from "./SearchPage";
 import LocationUniversalCard from "../components/Cards/LocationUniversal";
 import Mapboxuniv from "../components/Cards/Mapboxuniv";
+import { useState } from "react";
 
-const HomePage = () => {
+const HomePage = ({ initVals }: any) => {
   const searchActions = useSearchActions();
   const loading = useSearchState((state) => state.searchStatus.isLoading);
   const results = useSearchState((state) => state.universal.verticals) || [];
+  const [result, setResult] = useState<any>(initVals);
+
   const GridSection = ({ results, CardComponent, header }: any) => {
     if (!CardComponent) {
       return <div>Missing Card Component</div>;
@@ -72,7 +75,13 @@ const HomePage = () => {
     query && searchActions.setQuery(query);
     searchActions.setUniversalLimit(universalLimit);
     searchActions.setUniversal();
-    searchActions.executeUniversalQuery();
+    searchActions
+      .executeUniversalQuery()
+      .then((res) =>
+        query && res?.verticalResults[0].verticalKey === "devices"
+          ? setResult(res?.verticalResults[0].results[0])
+          : setResult(undefined)
+      );
   }, []);
   return (
     <div>
@@ -80,6 +89,61 @@ const HomePage = () => {
         <Loader></Loader>
       ) : (
         <>
+          {initVals ? (
+            <div className="hidden md:flex items-center justify-between bg-white px-10">
+              <div className="flex flex-col gap-2 w-1/2">
+                <div className="text-3xl font-bold">{initVals.name}</div>
+                <div className="text-xl font-light">
+                  {initVals.rawData.description}
+                </div>
+                <div className="flex w-full px-1 py-4 ">
+                  <a
+                    href={initVals.rawData.c_primaryCTA?.link}
+                    className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto uppercase font-medium   hover:shadow-lg "
+                  >
+                    {initVals.rawData.c_primaryCTA?.label}
+                  </a>
+                  <a
+                    href={initVals.rawData.c_secondaryCTA?.link}
+                    className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto uppercase font-medium   hover:shadow-lg"
+                  >
+                    {initVals.rawData.c_secondaryCTA?.label}
+                  </a>
+                </div>
+              </div>
+              <div className="w-1/2 flex justify-end py-4">
+                <img src={initVals.rawData.c_answersPhoto.url} />
+              </div>
+            </div>
+          ) : (
+            result && (
+              <div className="flex items-center justify-between bg-white px-10">
+                <div className="flex flex-col gap-2 w-1/2">
+                  <div className="text-3xl font-bold">{result.name}</div>
+                  <div className="text-xl font-light">
+                    {result.rawData.description}
+                  </div>
+                  <div className="flex w-full px-1 py-4 ">
+                    <a
+                      href={result.rawData.c_primaryCTA?.link}
+                      className="w-fit  items-center px-2 py-2 rounded-full text-black border-black bg-white flex justify-center border  text-center mx-auto uppercase font-medium   hover:shadow-lg "
+                    >
+                      {result.rawData.c_primaryCTA?.label}
+                    </a>
+                    <a
+                      href={result.rawData.c_secondaryCTA?.link}
+                      className="w-fit  items-center px-3 py-2 rounded-full text-white border-black bg-black  border flex justify-center text-center mx-auto uppercase font-medium   hover:shadow-lg"
+                    >
+                      {result.rawData.c_secondaryCTA?.label}
+                    </a>
+                  </div>
+                </div>
+                <div className="w-1/2 flex justify-end py-4">
+                  <img src={initVals.rawData.c_answersPhoto.url} />
+                </div>
+              </div>
+            )
+          )}
           {results.length ? (
             <div>
               <DirectAnswer customCssClasses={{ answerContainer: "my-4" }} />

@@ -159,7 +159,13 @@ const SearchPage = () => {
           ))
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
-        searchActions.executeUniversalQuery());
+        searchActions
+          .executeUniversalQuery()
+          .then((res) =>
+            query && res?.verticalResults[0].verticalKey === "devices"
+              ? setResults(res?.verticalResults[0].results[0])
+              : setResults(undefined)
+          ));
   }, []);
 
   useEffect(() => {
@@ -195,7 +201,11 @@ const SearchPage = () => {
         searchActions.setUniversalLimit(universalLimit),
         searchActions
           .executeUniversalQuery()
-          .then((res) => console.log(JSON.stringify(res))));
+          .then((res) =>
+            query && res?.verticalResults[0].verticalKey === "devices"
+              ? setResults(res?.verticalResults[0].results[0])
+              : setResults(undefined)
+          ));
   };
 
   return (
@@ -335,7 +345,7 @@ const SearchPage = () => {
       ) : currentPath.id === "videos" ? (
         <VideosPage />
       ) : (
-        <HomePage />
+        <HomePage initVals={results} />
       )}
     </div>
   );
