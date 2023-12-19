@@ -27,7 +27,8 @@ const ProductsGrid = ({ initVals }: any) => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
   const facets = useSearchState((state) => state.filters.facets);
   const [result, setResult] = useState<any>(initVals);
- 
+  console.log(JSON.stringify(initVals));
+  
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const query = urlSearchParams.get("query");

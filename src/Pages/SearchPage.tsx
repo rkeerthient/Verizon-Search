@@ -149,7 +149,14 @@ const SearchPage = () => {
     query && searchActions.setQuery(query);
     verticalKey
       ? (searchActions.setVertical(verticalKey),
-        searchActions.executeVerticalQuery())
+        searchActions
+          .executeVerticalQuery()
+          .then((res) =>
+            query
+              ? verticalKey === "devices" &&
+                setResults(res?.verticalResults.results[0])
+              : setResults(undefined)
+          ))
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
@@ -175,10 +182,20 @@ const SearchPage = () => {
     history.pushState(null, "", "?" + queryParams.toString());
     query && searchActions.setQuery(query);
     vert
-      ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
+      ? (searchActions.setVertical(vert),
+        searchActions
+          .executeVerticalQuery()
+          .then((res) =>
+            query
+              ? vert === "devices" &&
+                setResults(res?.verticalResults.results[0])
+              : setResults(undefined)
+          ))
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
-        searchActions.executeUniversalQuery());
+        searchActions
+          .executeUniversalQuery()
+          .then((res) => console.log(JSON.stringify(res))));
   };
 
   return (
