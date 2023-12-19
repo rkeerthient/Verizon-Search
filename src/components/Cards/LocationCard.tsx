@@ -4,6 +4,8 @@ import { RiShoppingCart2Line } from "react-icons/ri";
 import Location, { Coordinate } from "../../types/locations";
 import { BiEnvelopeOpen } from "react-icons/bi";
 import { useLocator } from "../../context/useLocator";
+import { PhoneIcon } from "@heroicons/react/20/solid";
+import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
 
 const LocationCard: CardComponent<Location> = ({
   result,
@@ -35,31 +37,36 @@ const LocationCard: CardComponent<Location> = ({
         selectedId === id ? `border-t-2 border-red-700` : `border-b-2 border`
       }`}
     >
-      <div className="flex justify-between ">
+      <div className="md:flex md:justify-between ">
         <a href={websiteUrl?.displayUrl} className=" font-bold underline">
           {index}. {name}
         </a>
         <a
           href={websiteUrl?.displayUrl}
-          className="px-2 py-1 font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
+          className="hidden md:block px-2 py-1 font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
         >
           View store details
         </a>
       </div>
       {address && (
         <div className="flex justify-between">
-          <div>
-            <p className="text-sm">{address.line1}</p>
-            <p className="text-sm">{`${address.city}, ${address.region} ${address.postalCode}`}</p>
+          <div className="flex gap-2">
+            <IoLocationOutline className="h-4 w-4 mt-2" />
+            <div>
+              <p className="text-base md:text-sm">{address.line1}</p>
+              <p className="text-base md:text-sm">{`${address.city}, ${address.region} ${address.postalCode}`}</p>
+            </div>
           </div>
-          <div>{distance}mi</div>
+
+          <div className="text-sm md:text-base">{distance}mi</div>
         </div>
       )}
-      <div className="flex justify-between">
+      <div className="flex flex-col md:flex-row justify-between">
         <div>
-          <p className="text-sm">
+          <p className="text-base md:text-sm">
             {mainPhone && (
-              <div className="flex items-center">
+              <div className="flex items-center gap-2">
+                <PhoneIcon className="h-4 w-4" />
                 {mainPhone &&
                   mainPhone
                     .replace("+1", "")
@@ -70,9 +77,12 @@ const LocationCard: CardComponent<Location> = ({
           </p>
         </div>
         {hours && (
-          <div>
-            {hours[dayName.toLowerCase()].openIntervals[0].start} -{" "}
-            {hours[dayName.toLowerCase()].openIntervals[0].end}
+          <div className="flex gap-2 items-center mt-4 md:mt-0">
+            <IoTimeOutline className="w-4 h-4" />
+            <div>
+              {hours[dayName.toLowerCase()].openIntervals[0].start} -{" "}
+              {hours[dayName.toLowerCase()].openIntervals[0].end}
+            </div>
           </div>
         )}
       </div>
@@ -85,7 +95,7 @@ const LocationCard: CardComponent<Location> = ({
             </a>
           </div>
           <div>
-            <div className="text-sm flex">
+            <div className="text-sm md:flex md:flex-row">
               {pickupAndDeliveryServices?.map((item, index) => (
                 <>
                   <span key={index}>{item}</span>
@@ -112,7 +122,7 @@ const LocationCard: CardComponent<Location> = ({
       </div>
       <a
         href={websiteUrl?.displayUrl}
-        className="px-2 py-1  w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
+        className="text-center px-2 py-1 w-full md:w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
       >
         View store details
       </a>

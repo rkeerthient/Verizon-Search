@@ -71,7 +71,7 @@ const StoreLocator = (): JSX.Element => {
           }}
         >
           <div className="flex h-[calc(100vh-242px)]">
-            <div className="flex w-2/5 flex-col">
+            <div className="w-full md:flex md:w-2/5 flex-col">
               <ResultsCount />
 
               <VerticalResults
@@ -82,7 +82,7 @@ const StoreLocator = (): JSX.Element => {
                 CardComponent={LocationCard}
               />
             </div>
-            <div className="w-3/5">
+            <div className="hidden md:block md:w-3/5">
               <Map
                 provider={MapboxMaps}
                 defaultZoom={10}

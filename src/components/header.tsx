@@ -41,18 +41,35 @@ const Header = () => {
     <div className="relative">
       <div className=" mb-8">
         <header className=" py-5 px-0 bg-black">
-          <div className="font-bold  items-center text-white centered-container w-full flex justify-between">
-            <div>
+          <div className="font-bold items-center text-white centered-container w-full flex justify-between">
+            <div className="hidden md:flex">
               <a href="https://www.verizon.com" className="mr-4 mx-auto">
                 <img
-                  className="w-8"
+                  className="md:w-8 w-4"
                   src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iNDI4IiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDQyOCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDI1MEg3Ny43MkwxNTUuNDMgNDE2LjY3TDM0OS43MyAwSDQyNy40NUwxOTQuMjkgNTAwSDExNi41OEwwIDI1MFoiIGZpbGw9IiNFRTAwMDAiLz4KPC9zdmc+Cg=="
                   alt="Link to verizon website"
                 />
               </a>
             </div>
-            <div className="flex gap-4">
+            <a
+              href="https://www.verizon.com"
+              className="flex md:hidden mr-auto "
+            >
+              <img
+                className="md:w-8 w-4"
+                src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iNDI4IiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDQyOCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDI1MEg3Ny43MkwxNTUuNDMgNDE2LjY3TDM0OS43MyAwSDQyNy40NUwxOTQuMjkgNTAwSDExNi41OEwwIDI1MFoiIGZpbGw9IiNFRTAwMDAiLz4KPC9zdmc+Cg=="
+                alt="Link to verizon website"
+              />
+            </a>
+            <div className="hidden md:flex gap-4">
               {links.map((item, index) => (
+                <a key={index} href={item.url} className=" hover:underline">
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex md:hidden gap-4">
+              {links.splice(0, 2).map((item, index) => (
                 <a key={index} href={item.url} className=" hover:underline">
                   {item.label}
                 </a>
@@ -60,10 +77,6 @@ const Header = () => {
             </div>
             <div className="flex gap-4 items-center">
               <div>LogIn</div>
-              <div className="font-light invisible flex  gap-1 items-center rounded-full px-4 py-2 bg-[#1b1d1f] hover:cursor-pointer">
-                <div>Search</div>
-                <IoIosSearch className="h-6 w-6" />
-              </div>
             </div>
           </div>
         </header>

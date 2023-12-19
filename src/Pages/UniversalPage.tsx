@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Loader from "../components/Loader";
 import { useSearchActions, useSearchState } from "@yext/search-headless-react";
 import {
+  AppliedFilters,
   DirectAnswer,
   MapboxMap,
   ResultsCount,
@@ -39,7 +40,7 @@ const HomePage = () => {
     return (
       <div>
         <div>{header}</div>
-        <div className="h-[400px] w-full">
+        <div className="h-[400px] w-full hidden md:block">
           <Mapboxuniv data={results}></Mapboxuniv>
         </div>
         <div className="flex flex-col mt-4 gap-2">
@@ -83,6 +84,9 @@ const HomePage = () => {
             <div>
               <DirectAnswer customCssClasses={{ answerContainer: "my-4" }} />
               <ResultsCount />
+              <AppliedFilters
+                customCssClasses={{ appliedFiltersContainer: `!flex flex-row` }}
+              ></AppliedFilters>
               <UniversalResults
                 showAppliedFilters={true}
                 customCssClasses={{

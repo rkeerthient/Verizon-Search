@@ -68,7 +68,7 @@ const ProductsGrid = ({ initVals }: any) => {
       ) : (
         <>
           {initVals ? (
-            <div className="flex items-center justify-between bg-white px-10">
+            <div className="hidden md:flex items-center justify-between bg-white px-10">
               <div className="flex flex-col gap-2 w-1/2">
                 <div className="text-3xl font-bold">{initVals.name}</div>
                 <div className="text-xl font-light">

@@ -3,6 +3,8 @@ import { RiShoppingCart2Line } from "react-icons/ri";
 import Location, { Coordinate } from "../../types/locations";
 import { BiEnvelopeOpen } from "react-icons/bi";
 import { BsClock } from "react-icons/bs";
+import { IoLocationOutline } from "react-icons/io5";
+import { PhoneIcon } from "@heroicons/react/20/solid";
 
 const LocationUniversalCard: CardComponent<Location> = ({
   result,
@@ -28,29 +30,31 @@ const LocationUniversalCard: CardComponent<Location> = ({
   return (
     <div
       id={id}
-      className={`flex flex-row justify-between border p-4 gap-4 bg-white mx-4 items-center`}
+      className={`flex flex-col md:flex-row justify-between border p-4 gap-4 bg-white md:mx-4 items-center`}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <div className="flex justify-between ">
           <a href={websiteUrl?.displayUrl} className=" font-bold underline">
             {index}. {name}
           </a>
         </div>
         {address && (
-          <div className="flex justify-between">
-            <a href={getGoogleMapsLink(geocodedCoordinate!)}>
+          <div className="flex justify-between mt-4">
+            <div className="flex gap-2">
+              <IoLocationOutline className="h-4 w-4 mt-2" />
               <div>
-                <p className="text-sm">{address.line1}</p>
-                <p className="text-sm">{`${address.city}, ${address.region} ${address.postalCode}`}</p>
+                <p className="text-base md:text-sm">{address.line1}</p>
+                <p className="text-base md:text-sm">{`${address.city}, ${address.region} ${address.postalCode}`}</p>
               </div>
-            </a>
+            </div>
           </div>
         )}
-        <div className="flex justify-between flex-col">
+        <div className="flex justify-between flex-col mt-4">
           <div>
-            <p className="text-sm">
+            <p className="md:text-sm">
               {mainPhone && (
-                <div className="flex items-center">
+                <div className="flex items-center gap-2">
+                  <PhoneIcon className="h-4 w-4" />
                   {mainPhone &&
                     mainPhone
                       .replace("+1", "")
@@ -61,7 +65,7 @@ const LocationUniversalCard: CardComponent<Location> = ({
             </p>
           </div>
           {hours && (
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center mt-4">
               <BsClock className="h-4 w-4" />
               <div>
                 {hours[dayName.toLowerCase()].openIntervals[0].start} -{" "}
@@ -82,7 +86,7 @@ const LocationUniversalCard: CardComponent<Location> = ({
               </a>
             </div>
             <div>
-              <div className="text-sm flex">
+              <div className="text-sm md:flex">
                 {pickupAndDeliveryServices?.map((item, index) => (
                   <>
                     <span key={index}>{item}</span>
@@ -96,7 +100,7 @@ const LocationUniversalCard: CardComponent<Location> = ({
             </div>
           </div>
         </div>
-        <div className="flex gap-2 items-start">
+        <div className="flex gap-2 items-start mt-4">
           <BiEnvelopeOpen className="mt-1" />
           <div className="flex flex-col">
             <div>
@@ -111,7 +115,7 @@ const LocationUniversalCard: CardComponent<Location> = ({
       <div>
         <a
           href={websiteUrl?.displayUrl}
-          className="px-2 py-1 w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
+          className="px-2 py-1 w-full text-center md:w-fit ml-auto font-bold border-2 text-sm border-black text-black hover:shadow-md hover:cursor-pointer rounded-full"
         >
           View store details
         </a>
