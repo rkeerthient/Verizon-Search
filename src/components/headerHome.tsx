@@ -44,7 +44,7 @@ const HeaderHome = () => {
     } else {
       queryParams.delete("query");
     }
-    history.pushState(null, "/search", "?" + queryParams.toString());
+    history.pushState(null, "", "/search?" + queryParams.toString());
   };
 
   return (
@@ -71,7 +71,7 @@ const HeaderHome = () => {
             <div className="flex gap-4 items-center">
               <div>LogIn</div>
               <div
-                className="font-light flex  gap-1 items-center rounded-full px-4 py-2 bg-[#1b1d1f]"
+                className="font-light flex  gap-1 items-center rounded-full px-4 py-2 bg-[#1b1d1f] hover:cursor-pointer"
                 onClick={() => setShowSearch(true)}
               >
                 <div>Search</div>
