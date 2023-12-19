@@ -39,7 +39,7 @@ const HeaderHome = ({ isSearchOpen }: any) => {
   };
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="mb-8 overflow-hidden -z-10 ">
         <header className="py-5 px-4 md:px-0 bg-black">
           <div className="font-bold items-center text-white mx-auto max-w-screen-xl flex justify-between">

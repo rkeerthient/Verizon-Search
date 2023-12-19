@@ -1,4 +1,4 @@
-import * as React from "react";
+import "@yext/chat-ui-react/bundle.css";
 import {
   ChatHeadlessProvider,
   HeadlessConfig,
@@ -25,17 +25,25 @@ const Footer = () => {
         >
           <ChatHeadlessProvider config={config}>
             <ChatPanel
-              showFeedbackButtons={false}
-              stream={true}
+              showTimestamp={true}
+              showFeedbackButtons={true}
               customCssClasses={{
-                inputContainer: "fixed w-[400px] m-auto  bottom-0",
-                container: "h-[400px] overflow-scroll bg-black text-white",
+                container: "md:!h-[600px] !h-full overflow-scroll",
+                messageBubbleCssClasses: {
+                  bubble__user: `!bg-none !bg-black text-white`,
+                },
+                inputCssClasses: {
+                  sendButton: `!bg-black hover:opacity-80`,
+                  container: ` focus:!border-black`,
+                },
               }}
               header={
                 <ChatHeader
-                  showCloseButton={true}
-                  title={"NWC Assistant"}
+                  title={"Verizon Assistant"}
                   showRestartButton={true}
+                  customCssClasses={{
+                    container: "!bg-none !bg-black text-white",
+                  }}
                 ></ChatHeader>
               }
             />
@@ -45,7 +53,7 @@ const Footer = () => {
       <div style={{ position: "fixed", bottom: "20px", right: "20px" }}>
         {!showChat ? (
           <IoChatbubblesSharp
-            className="text-brand-cta"
+            className="text-brand-cta opac"
             onClick={() => setShowChat(!showChat)}
             style={{
               fontSize: "1.875rem",
