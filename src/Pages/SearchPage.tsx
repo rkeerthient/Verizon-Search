@@ -12,7 +12,7 @@ import {
   RenderEntityPreviews,
   SearchBar,
 } from "@yext/search-ui-react";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
 import FAQsPage from "./FAQsPage";
 import LinksPage from "./LinksPage";

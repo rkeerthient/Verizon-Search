@@ -120,3 +120,19 @@
 .map-container {
   @apply w-full h-[400px];
 }
+
+.homeSearch > div {
+  @apply w-full !rounded-none !border-none !font-light !bg-transparent   text-gray-300;
+}
+
+.homeSearch > div > * {
+  @apply !border-b-4 !bg-transparent;
+}
+
+.homeSearch * {
+  @apply hover:!bg-transparent;
+}
+
+.opts {
+  @apply text-white !border-none !font-light hover:!font-extrabold;
+}

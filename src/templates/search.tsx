@@ -11,21 +11,13 @@ import {
   HeadConfig,
 } from "@yext/pages";
 import PageLayout from "../components/page-layout";
-import LinksPage from "../Pages/LinksPage";
 import SearchPage from "../Pages/SearchPage";
-import HeaderHome from "../components/headerHome";
-import Footer from "../components/footer";
-import {
-  SearchHeadlessProvider,
-  provideHeadless,
-} from "@yext/search-headless-react";
-import searchConfig from "../components/searchConfig";
 
 export const config: TemplateConfig = {
-  name: "index",
+  name: "search",
 };
 export const getPath: GetPath<TemplateRenderProps> = () => {
-  return `index.html`;
+  return `search.html`;
 };
 
 export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
@@ -48,16 +40,15 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   };
 };
 
-const HomePage: Template<TemplateRenderProps> = ({}: TemplateRenderProps) => {
+const SearchWrapper: Template<
+  TemplateRenderProps
+> = ({}: TemplateRenderProps) => {
   return (
-    <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-      <HeaderHome></HeaderHome>
+    <PageLayout>
       <div className="centered-container">
-        {/* <SearchPage /> */}
-        <img src="https://i.imgur.com/lzgudD1.png" alt="" />
+        <SearchPage />
       </div>
-      <Footer></Footer>
-    </SearchHeadlessProvider>
+    </PageLayout>
   );
 };
-export default HomePage;
+export default SearchWrapper;
