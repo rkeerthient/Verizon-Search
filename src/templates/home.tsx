@@ -20,6 +20,7 @@ import {
   provideHeadless,
 } from "@yext/search-headless-react";
 import searchConfig from "../components/searchConfig";
+import { useState } from "react";
 
 export const config: TemplateConfig = {
   name: "index",
@@ -49,11 +50,22 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
 };
 
 const HomePage: Template<TemplateRenderProps> = ({}: TemplateRenderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleIsOpen = (status: boolean) => {
+    console.log(status);
+    setIsOpen(status);
+  };
   return (
     <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-      <HeaderHome></HeaderHome>
-      <div className="centered-container">
-        <img src="https://i.imgur.com/lzgudD1.png" alt="" />
+      <HeaderHome isSearchOpen={handleIsOpen}></HeaderHome>
+      <div className="centered-container ">
+        <img
+          src="https://i.imgur.com/lzgudD1.png"
+          alt=""
+          className={`w-full h-full object-cover ${
+            isOpen && `fixed !h-0 overflow-hidden`
+          }`}
+        />
       </div>
       <Footer></Footer>
     </SearchHeadlessProvider>

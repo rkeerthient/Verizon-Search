@@ -17,12 +17,13 @@ import ProductsGrid from "./ProductsGrid";
 import FAQsPage from "./FAQsPage";
 import LinksPage from "./LinksPage";
 import ContactInfoPage from "./ContactInfoPage";
-import HomePage from "./HomePage";
 import StoreLocator from "./StorePage";
 import searchConfig from "../components/searchConfig";
 import Ce_device from "../types/devices";
 import { Image } from "@yext/sites-components";
 import VideosPage from "./VideosPage";
+import { useGetSearchResults } from "../components/utils/getSearchResults";
+import HomePage from "./UniversalPage";
 export const universalLimit = {
   devices: 5,
   faqs: 5,
@@ -35,6 +36,7 @@ const SearchPage = () => {
   const searchActions = useSearchActions();
   const vert = useSearchState((state) => state.vertical.verticalKey);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [results, setResults] = useState<any>();
   const [currentPath, setCurrentPath] = useState({
     label: "All Results",
     id: "all",
@@ -91,7 +93,14 @@ const SearchPage = () => {
     query && searchActions.setQuery(query);
     verticalKey
       ? (searchActions.setVertical(verticalKey),
-        searchActions.executeVerticalQuery())
+        searchActions
+          .executeVerticalQuery()
+          .then(
+            (res) =>
+              query &&
+              verticalKey === "devices" &&
+              setResults(res?.verticalResults.results[0])
+          ))
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
@@ -104,6 +113,7 @@ const SearchPage = () => {
       : queryParams.delete("vertical");
     history.pushState(null, "", "?" + queryParams.toString());
   }, [currentPath]);
+
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     const queryParams = new URLSearchParams(window.location.search);
@@ -116,7 +126,15 @@ const SearchPage = () => {
     history.pushState(null, "", "?" + queryParams.toString());
     query && searchActions.setQuery(query);
     vert
-      ? (searchActions.setVertical(vert), searchActions.executeVerticalQuery())
+      ? (searchActions.setVertical(vert),
+        searchActions
+          .executeVerticalQuery()
+          .then(
+            (res) =>
+              query &&
+              currentPath.id === "devices" &&
+              setResults(res?.verticalResults.results[0])
+          ))
       : (searchActions.setUniversal(),
         searchActions.setUniversalLimit(universalLimit),
         searchActions.executeUniversalQuery());
@@ -304,7 +322,7 @@ const SearchPage = () => {
         </div>
       </div>
       {currentPath && currentPath.id === "devices" ? (
-        <ProductsGrid />
+        <ProductsGrid initVals={results} />
       ) : currentPath.id === "faqs" ? (
         <FAQsPage />
       ) : currentPath.id === "contactInfo" ? (

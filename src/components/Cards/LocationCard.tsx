@@ -18,7 +18,6 @@ const LocationCard: CardComponent<Location> = ({
     pickupAndDeliveryServices,
   } = result.rawData;
   const { selectedId, setSelectedId } = useLocator();
-  console.log(pickupAndDeliveryServices);
 
   const getGoogleMapsLink = (coordinate: Coordinate): string => {
     return `https://www.google.com/maps/dir/?api=1&destination=${coordinate.latitude},${coordinate.longitude}`;

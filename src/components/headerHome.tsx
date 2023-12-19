@@ -1,9 +1,6 @@
-import * as React from "react";
-import Cta from "./cta";
 import { IoIosSearch } from "react-icons/io";
 import { SearchBar, onSearchFunc } from "@yext/search-ui-react";
-import { SearchActions, useSearchActions } from "@yext/search-headless-react";
-import { IoClose, IoCloseCircle } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import { useState } from "react";
 
 type Link = {
@@ -34,8 +31,8 @@ const links: Link[] = [
   },
 ];
 
-const HeaderHome = () => {
-  const [showSearch, setShowSearch] = useState<boolean>(false);
+const HeaderHome = ({ isSearchOpen }: any) => {
+  const [showSearch, setShowSearch] = useState<boolean>(isSearchOpen);
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     if (query) window.open("/search.html?query=" + query, "_self");
@@ -43,9 +40,9 @@ const HeaderHome = () => {
 
   return (
     <div className="relative">
-      <div className=" mb-8">
-        <header className=" py-5 px-0 bg-black">
-          <div className="font-bold  items-center text-white centered-container w-full flex justify-between">
+      <div className="mb-8 overflow-hidden -z-10 ">
+        <header className="py-5 px-4 md:px-0 bg-black">
+          <div className="font-bold items-center text-white mx-auto max-w-screen-xl flex justify-between">
             <div>
               <a href="https://www.verizon.com" className="mr-4 mx-auto">
                 <img
@@ -55,9 +52,9 @@ const HeaderHome = () => {
                 />
               </a>
             </div>
-            <div className="flex gap-4">
+            <div className="hidden md:flex gap-4">
               {links.map((item, index) => (
-                <a key={index} href={item.url} className=" hover:underline">
+                <a key={index} href={item.url} className="hover:underline">
                   {item.label}
                 </a>
               ))}
@@ -65,8 +62,8 @@ const HeaderHome = () => {
             <div className="flex gap-4 items-center">
               <div>LogIn</div>
               <div
-                className="font-light flex  gap-1 items-center rounded-full px-4 py-2 bg-[#1b1d1f] hover:cursor-pointer"
-                onClick={() => setShowSearch(true)}
+                className="font-light flex gap-1 items-center rounded-full px-4 py-2 bg-[#1b1d1f] cursor-pointer hover:cursor-pointer"
+                onClick={() => (setShowSearch(true), isSearchOpen(true))}
               >
                 <div>Search</div>
                 <IoIosSearch className="h-6 w-6" />
@@ -76,24 +73,25 @@ const HeaderHome = () => {
         </header>
       </div>
       {showSearch && (
-        <div className="h-screen bg-black w-full z-10 absolute flex justify-end px-36 -mt-8 ">
-          <div className="w-1/3  ">
+        <div className="h-screen fixed bg-black w-full md:w-full z-10 md:absolute flex justify-end px-4 md:px-8 -mt-8">
+          <div className="md:w-1/3 w-full">
             <SearchBar
               onSearch={handleSearch}
               hideRecentSearches={true}
               customCssClasses={{
-                searchBarContainer: `homeSearch`,
-                inputElement: `!p-0 !bg-transparent text-3xl caret-white !text-white`,
-                option: `opts`,
-                icon: `hover:!none`,
-                inputDivider: `!border-none`,
+                searchBarContainer: "homeSearch",
+                inputElement:
+                  "!p-0 !bg-transparent text-lg md:text-3xl caret-white !text-white",
+                option: "opts",
+                icon: "hover:!none",
+                inputDivider: "!border-none",
               }}
               placeholder="What are you looking for?"
-            ></SearchBar>
+            />
           </div>
           <IoClose
-            className="h-8 w-8 text-white "
-            onClick={() => setShowSearch(false)}
+            className="h-8 w-8 text-white"
+            onClick={() => (setShowSearch(false), isSearchOpen(false))}
           />
         </div>
       )}
