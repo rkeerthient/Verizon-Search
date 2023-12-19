@@ -32,7 +32,7 @@ const links: Link[] = [
 ];
 
 const HeaderHome = ({ isSearchOpen }: any) => {
-  const [showSearch, setShowSearch] = useState<boolean>(isSearchOpen);
+  const [showSearch, setShowSearch] = useState<boolean>(false);
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
     if (query) window.open("/search.html?query=" + query, "_self");

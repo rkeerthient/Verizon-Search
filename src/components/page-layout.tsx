@@ -1,5 +1,4 @@
 import * as React from "react";
-import Site from "../types/Site";
 import Header from "./header";
 import Footer from "./footer";
 import {
@@ -9,19 +8,21 @@ import {
 import searchConfig from "./searchConfig";
 
 type Props = {
-  _site?: Site;
+  _site?: any;
   children?: React.ReactNode;
 };
 
 const PageLayout = ({ _site, children }: Props) => {
   return (
-    <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
-      <div className="min-h-screen !bg-[#f6f6f6]">
-        <Header _site={_site} />
-        {children}
-        <Footer _site={_site}></Footer>
-      </div>
-    </SearchHeadlessProvider>
+    <>
+      <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
+        <div className="min-h-screen !bg-[#f6f6f6]">
+          <Header _site={_site} />
+          {children}
+          <Footer _site={_site}></Footer>
+        </div>
+      </SearchHeadlessProvider>
+    </>
   );
 };
 

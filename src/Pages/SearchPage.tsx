@@ -199,7 +199,7 @@ const SearchPage = () => {
             universalLimit: { devices: 4 },
             entityPreviewsDebouncingTime: 300,
           }}
-          onSearch={() => handleSearch}
+          onSearch={handleSearch}
         />
       ) : (
         <SearchBar
@@ -208,7 +208,7 @@ const SearchPage = () => {
             searchButton: "text-black searchBar",
           }}
           hideRecentSearches={true}
-          onSearch={() => handleSearch}
+          onSearch={handleSearch}
         />
       )}
       <div className=" bg-white mt-4 px-1 md:px-6 border-y sm:relative ">
