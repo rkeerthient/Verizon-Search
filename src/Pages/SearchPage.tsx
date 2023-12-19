@@ -316,7 +316,7 @@ const SearchPage = () => {
       ) : currentPath.id === "videos" ? (
         <VideosPage />
       ) : (
-        <SearchPage />
+        <HomePage />
       )}
     </div>
   );

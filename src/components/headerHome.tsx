@@ -38,13 +38,7 @@ const HeaderHome = () => {
   const [showSearch, setShowSearch] = useState<boolean>(false);
   const handleSearch: onSearchFunc = (searchEventData) => {
     const { query } = searchEventData;
-    const queryParams = new URLSearchParams(window.location.search);
-    if (query) {
-      queryParams.set("query", query);
-    } else {
-      queryParams.delete("query");
-    }
-    history.pushState(null, "", "/search?" + queryParams.toString());
+    if (query) window.open("/search.html?query=" + query, "_self");
   };
 
   return (

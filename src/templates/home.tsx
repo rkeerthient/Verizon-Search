@@ -53,7 +53,6 @@ const HomePage: Template<TemplateRenderProps> = ({}: TemplateRenderProps) => {
     <SearchHeadlessProvider searcher={provideHeadless(searchConfig)}>
       <HeaderHome></HeaderHome>
       <div className="centered-container">
-        {/* <SearchPage /> */}
         <img src="https://i.imgur.com/lzgudD1.png" alt="" />
       </div>
       <Footer></Footer>

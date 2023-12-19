@@ -106,7 +106,7 @@ const HomePage = () => {
                     label: "Videos",
                     viewAllButton: true,
                   },
-                  links: {
+                  link: {
                     CardComponent: LinkCard,
                     SectionComponent: GridSection,
                     label: "Links",
