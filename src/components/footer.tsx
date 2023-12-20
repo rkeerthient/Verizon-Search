@@ -1,11 +1,12 @@
 import "@yext/chat-ui-react/bundle.css";
+
+import { IoChatbubblesSharp } from "react-icons/io5";
+import { useState } from "react";
 import {
   ChatHeadlessProvider,
   HeadlessConfig,
 } from "@yext/chat-headless-react";
-import { ChatHeader, ChatPanel } from "@yext/chat-ui-react";
-import { IoChatbubblesSharp, IoCaretDownOutline } from "react-icons/io5";
-import { useState } from "react";
+import { ChatPanel, ChatHeader } from "@yext/chat-ui-react";
 const config: HeadlessConfig = {
   botId: import.meta.env.YEXT_PUBLIC_BOTID,
   apiKey: import.meta.env.YEXT_PUBLIC_BOT_API_KEY,
