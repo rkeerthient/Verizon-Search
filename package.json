@@ -24,6 +24,9 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@types/react-slick": "^0.23.10",
+    "@yext/chat-headless": "^0.7.2",
+    "@yext/chat-headless-react": "^0.6.1",
+    "@yext/chat-ui-react": "^0.8.4",
     "@yext/react-components": "^0.0.6",
     "@yext/search-headless-react": "2.4.0-beta.3",
     "@yext/search-ui-react": "1.4.0-beta.3",
@@ -43,9 +46,7 @@
     "react-youtube": "^10.1.0",
     "schema-dts": "^1.1.2",
     "slick-carousel": "^1.8.1",
-    "tailwind-merge": "^1.13.1",
-    "@yext/chat-headless-react": "^0.6.1",
-    "@yext/chat-ui-react": "^0.7.1"
+    "tailwind-merge": "^1.13.1"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",

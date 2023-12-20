@@ -19,16 +19,13 @@ const Footer = () => {
         <img src="https://i.imgur.com/TJLHGD0.png" alt="" />
       </footer>
       {showChat && (
-        <div
-          className="w-[400px]  mb-8"
-          style={{ bottom: "20px", right: "20px", position: "fixed" }}
-        >
+        <div className="w-full md:w-[400px] top-24 md:top-20 h-sceen mb-8 fixed md:mb-0 md:right-5">
           <ChatHeadlessProvider config={config}>
             <ChatPanel
               showTimestamp={true}
               showFeedbackButtons={true}
               customCssClasses={{
-                container: "md:!h-[600px] !h-full overflow-scroll",
+                container: " md:!h-[600px] !h-[70vh] overflow-scroll",
                 messageBubbleCssClasses: {
                   bubble__user: `!bg-none !bg-black text-white`,
                 },
@@ -39,6 +36,8 @@ const Footer = () => {
               }}
               header={
                 <ChatHeader
+                  showCloseButton={true}
+                  onClose={() => setShowChat(false)}
                   title={"Verizon Assistant"}
                   showRestartButton={true}
                   customCssClasses={{
@@ -50,20 +49,11 @@ const Footer = () => {
           </ChatHeadlessProvider>
         </div>
       )}
-      <div style={{ position: "fixed", bottom: "20px", right: "20px" }}>
-        {!showChat ? (
+      <div className="fixed bottom-44 md:bottom-10  right-16">
+        {!showChat && (
           <IoChatbubblesSharp
-            className="text-brand-cta opac"
+            className="text-[#ed0000] opac"
             onClick={() => setShowChat(!showChat)}
-            style={{
-              fontSize: "1.875rem",
-              lineHeight: "2.25rem",
-            }}
-          />
-        ) : (
-          <IoCaretDownOutline
-            onClick={() => setShowChat(!showChat)}
-            className="text-brand-cta"
             style={{
               fontSize: "1.875rem",
               lineHeight: "2.25rem",
