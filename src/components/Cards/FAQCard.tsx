@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import Faq from "../../types/faqs";
-import { LexicalRichText } from "@yext/react-components";
+import { LexicalRichText } from "@yext/pages-components";
 
 const FAQCard = (props: CardProps<Faq>): JSX.Element => {
   const { result } = props;

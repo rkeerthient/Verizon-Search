@@ -53,7 +53,7 @@ const Footer = () => {
       <div className="fixed bottom-44 md:bottom-10  right-16">
         {!showChat && (
           <IoChatbubblesSharp
-            className="text-[#ed0000] opac"
+            className="text-[#ed0000] hover:cursor-pointer"
             onClick={() => setShowChat(!showChat)}
             style={{
               fontSize: "1.875rem",

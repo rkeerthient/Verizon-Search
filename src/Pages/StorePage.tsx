@@ -19,7 +19,7 @@ import { useState } from "react";
 import { LocatorProvider } from "../context/useLocator";
 import { useGetSearchResults } from "../components/utils/getSearchResults";
 import CustomMarker from "../components/CustomMarker";
-import { Map } from "@yext/pages/components";
+import { Map } from "@yext/sites-components";
 import { MapboxMaps } from "@yext/components-tsx-maps";
 
 const StoreLocator = (): JSX.Element => {

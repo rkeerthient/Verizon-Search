@@ -1,4 +1,4 @@
-import { Map } from "@yext/pages/components";
+import { Map } from "@yext/sites-components";
 import { MapboxMaps } from "@yext/components-tsx-maps";
 import CustomMarkerUniversal from "../components/CustomMarkerUniversal";
 import "mapbox-gl/dist/mapbox-gl.css";

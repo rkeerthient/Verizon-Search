@@ -3,7 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
-import { LexicalRichText } from "@yext/react-components";
+import { LexicalRichText } from "@yext/pages-components";
 import Faq from "../types/faqs";
 
 const FAQCard = (props: CardProps<Faq>): JSX.Element => {

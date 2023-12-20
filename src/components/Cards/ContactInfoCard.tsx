@@ -1,5 +1,5 @@
 import { CardProps } from "@yext/search-ui-react";
-import { LexicalRichText } from "@yext/react-components";
+import { LexicalRichText } from "@yext/pages-components";
 import Ce_contactInformation from "../../types/contact_information";
 const ContactInfoCard = (
   props: CardProps<Ce_contactInformation>

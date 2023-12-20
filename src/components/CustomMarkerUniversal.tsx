@@ -1,5 +1,5 @@
 import type { Coordinate } from "@yext/types";
-import { Marker } from "@yext/pages/components";
+import { Marker } from "@yext/sites-components";
 
 type CustomMarkerProps = {
   coordinate: Coordinate;
